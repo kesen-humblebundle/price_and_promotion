@@ -3,15 +3,15 @@ import React from 'react';
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { };
+    this.state = {};
   }
 
   render() {
-    return (<div>
+    return (
       <div>
-        <h1>Price and Promotion</h1>
+        <h1>App Component</h1>
       </div>
-    </div>)
+    );
   }
 }
 
