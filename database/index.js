@@ -1,7 +1,13 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://127.0.0.1:27017/PriceAndPromo', {
-  useMongoClient: true,
-});
+require('dotenv').config();
+const dbConnectionURI = process.env.DB_NAME;
+
+mongoose.connect(`mongodb://${dbConnectionURI}`,
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  }
+);
 
 const db = mongoose.connection;
 
@@ -14,12 +20,11 @@ db.once('openUri', function () {
 });
 
 const priceAndPromoSchema = mongoose.Schema({
-  price: String,
-  discount: String,
+  price: Number,
+  discount: Number,
   start: {
     type: Date
   },
-  date: { type: Date, default: Date.now },
   expiry: {
     type: Date
   },
@@ -28,3 +33,4 @@ const priceAndPromoSchema = mongoose.Schema({
 const PriceAndPromo = mongoose.model('PriceAndPromo', priceAndPromoSchema);
 
 module.exports.db = db;
+module.exports = PriceAndPromo;
