@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/KichiUeda/price_and_promotion#readme",
   "dependencies": {
+    "axios": "^0.19.2",
     "babel-core": "^6.26.3",
     "babel-loader": "^8.1.0",
     "babel-preset-env": "^1.7.0",
@@ -35,10 +36,12 @@
     "faker": "^4.1.0",
     "gulp": "^4.0.2",
     "mongod": "^2.18.1",
+    "mongodb": "^3.5.9",
     "mongoose": "^5.9.19",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "resolve-cwd": "^3.0.0"
+    "resolve-cwd": "^3.0.0",
+    "styled-components": "^5.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.10.3",
@@ -55,5 +58,4 @@
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11"
   }
-
 }
