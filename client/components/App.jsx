@@ -4,13 +4,15 @@ import PriceAndPromoContainer from "./PriceAndPromoContainer.jsx";
 import PriceImage from "./PriceImage.jsx"
 import axios from 'axios';
 
-const AppWrapper = styled.div`
-  width: 370.5px;
-  height: 431.54px;
-`;
 const AppStyled = styled.div`
-  background-color: #1b1e1b;
+  font-family: 'Lucida Grande', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  width:370.5px;
+  height: 431.5px;
+  background: #1b1e1b;
 `;
+
+const DEFAULT_PRODUCT_ID = 21;
 
 class App extends React.Component {
   constructor(props) {
@@ -40,8 +42,29 @@ class App extends React.Component {
       });
   }
 
+  getProductId(path) {
+    console.log('this.getProductId call success path=', path);
+    if (path !== null) {
+      let pathArray = path.split('/');
+      if (pathArray.length > 0) {
+        let productId = Number(pathArray[pathArray.length - 1]);
+        if (productId !== NaN) {
+          console.log('success pulling and parsing id: ', productId);
+          return (productId);
+        }
+      }
+    }
+    return DEFAULT_PRODUCT_ID;
+  }
+
+  getProductIdFromUrl() {
+    console.log('get id from URL called successfully. ', window.location.pathname);
+    return this.getProductId(window.location.pathname);
+  }
+
   componentDidMount() {
-    let productId = 5;
+
+    let productId = this.getProductIdFromUrl();
 
     this.fetchProductPriceAndPromo(productId).then(ret => {
       let data = {};
@@ -63,23 +86,16 @@ class App extends React.Component {
       return (null);
     console.log('state in render: ', this.state)
     return (
-      <AppWrapper>
-        <AppStyled>
-          <PriceImage image={this.state.image} />
-          <PriceAndPromoContainer values={{
-            platforms: this.state.platforms,
-            price: this.state.price,
-            promotion: this.state.promotion
-          }} />
-        </AppStyled>
-      </AppWrapper>
+      <AppStyled>
+        <PriceImage image={this.state.image} />
+        <PriceAndPromoContainer values={{
+          platforms: this.state.platforms,
+          price: this.state.price,
+          promotion: this.state.promotion
+        }} />
+      </AppStyled>
     );
   }
 }
 
 export default App;
-  // display: grid;
-  // grid-template-columns: 1fr;
-  // grid-template-rows: repeat(6, 1fr);
-  // grid-column-gap: 0px;
-  // grid-row-gap: 0px;
