@@ -44,6 +44,10 @@ app.get('/PriceAndPromotion/:product_id', (req, res) => {
 
 });
 
+app.get('/:product_id', (req, res) => {
+  res.sendFile(path.resolve('public/index.html'));
+});
+
 app.listen(PORT, (error) => {
   if (error) {
     console.log('Server connection failed: ', error);
