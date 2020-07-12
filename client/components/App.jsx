@@ -4,12 +4,12 @@ import PriceAndPromoContainer from "./PriceAndPromoContainer.jsx";
 import PriceImage from "./PriceImage.jsx"
 import axios from 'axios';
 
-const AppWrapper = styled.div`
-  width: 370.5px;
-  height: 431.54px;
-`;
 const AppStyled = styled.div`
-  background-color: #1b1e1b;
+  font-family: 'Lucida Grande', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  width:370.5px;
+  height: 431.5px;
+  background: #1b1e1b;
 `;
 
 class App extends React.Component {
@@ -63,16 +63,14 @@ class App extends React.Component {
       return (null);
     console.log('state in render: ', this.state)
     return (
-      <AppWrapper>
-        <AppStyled>
-          <PriceImage image={this.state.image} />
-          <PriceAndPromoContainer values={{
-            platforms: this.state.platforms,
-            price: this.state.price,
-            promotion: this.state.promotion
-          }} />
-        </AppStyled>
-      </AppWrapper>
+      <AppStyled>
+        <PriceImage image={this.state.image} />
+        <PriceAndPromoContainer values={{
+          platforms: this.state.platforms,
+          price: this.state.price,
+          promotion: this.state.promotion
+        }} />
+      </AppStyled>
     );
   }
 }

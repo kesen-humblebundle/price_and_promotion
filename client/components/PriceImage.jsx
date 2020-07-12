@@ -4,9 +4,8 @@ import styled from 'styled-components';
 
 const ImageStyled = styled.div`
   background-color:  lightblue;
-  color: white;
-  width: 370.5px;
   height: 212.31px;
+  width:100%;
 
   `;
 

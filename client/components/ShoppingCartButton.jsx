@@ -2,12 +2,15 @@ import React from 'react';
 import styled from 'styled-components';
 
 const ShoppingCartButtonStyled = styled.button`
-  height: 338.51px;
-  padding: 54.66px;
-  font-size: 1.4em;
+  background: #9cb946;
+  width:100%;
+  height: 54.66px;
+  width: 95%;
+  margin: 0 auto;
+  margin-bottom: 2px;
+  color: white;
+  font-size: 1.25em;
   font-weight: bold;
-  color: yellowgreen;
-  display: flex;
 `;
 
 const ShoppingCartButton = (props) => {
