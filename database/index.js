@@ -20,6 +20,7 @@ db.once('openUri', function () {
 });
 
 const priceAndPromoSchema = mongoose.Schema({
+  product_id: Number,
   price: Number,
   discount: Number,
   start: {
@@ -32,5 +33,4 @@ const priceAndPromoSchema = mongoose.Schema({
 
 const PriceAndPromo = mongoose.model('PriceAndPromo', priceAndPromoSchema);
 
-module.exports.db = db;
 module.exports = PriceAndPromo;

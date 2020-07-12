@@ -74,6 +74,6 @@ describe('Game Model Test', () => {
     expect(err.errors.price).toBeDefined();
   });
 
-
+ 
 })
 
