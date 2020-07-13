@@ -12,6 +12,8 @@ const AppStyled = styled.div`
   background: #1b1e1b;
 `;
 
+const DEFAULT_PRODUCT_ID = 21;
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -40,8 +42,29 @@ class App extends React.Component {
       });
   }
 
+  getProductId(path) {
+    console.log('this.getProductId call success path=', path);
+    if (path !== null) {
+      let pathArray = path.split('/');
+      if (pathArray.length > 0) {
+        let productId = Number(pathArray[pathArray.length - 1]);
+        if (productId !== NaN) {
+          console.log('success pulling and parsing id: ', productId);
+          return (productId);
+        }
+      }
+    }
+    return DEFAULT_PRODUCT_ID;
+  }
+
+  getProductIdFromUrl() {
+    console.log('get id from URL called successfully. ', window.location.pathname);
+    return this.getProductId(window.location.pathname);
+  }
+
   componentDidMount() {
-    let productId = 5;
+
+    let productId = this.getProductIdFromUrl();
 
     this.fetchProductPriceAndPromo(productId).then(ret => {
       let data = {};
@@ -76,8 +99,3 @@ class App extends React.Component {
 }
 
 export default App;
-  // display: grid;
-  // grid-template-columns: 1fr;
-  // grid-template-rows: repeat(6, 1fr);
-  // grid-column-gap: 0px;
-  // grid-row-gap: 0px;
