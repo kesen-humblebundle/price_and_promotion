@@ -30,7 +30,7 @@ class App extends React.Component {
 
   fetchProductPriceAndPromo(productId) {
 
-    return axios.get(`/PriceAndPromotion/${productId}`)
+    return axios.get(`http://localhost:3001/PriceAndPromotion/${productId}`)
       .then((response) => {
         let data = response.data;
         console.log('Success getting price and promotion data: ', data);
