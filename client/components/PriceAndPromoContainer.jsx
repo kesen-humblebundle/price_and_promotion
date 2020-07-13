@@ -11,10 +11,7 @@ const PriceContainer = styled.div`
   width: 370.51px;
   height: 212.31px;
   background-color:  #1b1e1b;
-  justify-content: space-around;
-  margin-right: 5vw;
-  margin-left: 5vw;
-  margin-bottom: 10vh;
+  text-align: center;
 `;
 
 const PriceAndPromoContainer = (props) => {

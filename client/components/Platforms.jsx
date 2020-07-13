@@ -2,16 +2,15 @@ import React from 'react';
 import styled from 'styled-components';
 
 const PlatformsStyled = styled.div`
-  width: 338.91px;
-  height: 22.31px;
+background: 1b1e1b;
+text-align: left;
+padding-left: 4px;
+height: 25px;
 `;
 
 const IconStyled = styled.div`
-  color: white;
-  width: 18px;
-  height: 17.95px;
-  margin: 0;
-  padding: 0;
+color: white;
+height: 24px;
 `;
 
 const Platforms = (props) => {
