@@ -25,7 +25,7 @@ Add following environmental variables:
   DB_NAME='127.0.0.1:27017/PriceAndPromo'
 
 Run install and start scripts
-        npm install         # install dependencies
+        npm install           # install dependencies
         npm run seedDB        # build and seed DB tables
 
         # For development
