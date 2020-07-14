@@ -4,8 +4,8 @@
   "description": "FEC UEDA Price and Promotion Service",
   "main": "index.js",
   "scripts": {
-    "test": "mocha ./test/test.js",
-    "dev": "nodemon ./server/index.js",
+     "test": "mocha ./test/test.js",
+    "start:dev": "nodemon ./server/index.js",
     "start": "node index.js",
     "build": "webpack",
     "react:dev": "webpack --watch -d",
@@ -34,7 +34,6 @@
     "express": "^4.17.1",
     "faker": "^4.1.0",
     "gulp": "^4.0.2",
-    "mongod": "^2.18.1",
     "mongodb": "^3.5.9",
     "mongoose": "^5.9.19",
     "react": "^16.13.1",

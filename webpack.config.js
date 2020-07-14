@@ -2,6 +2,13 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
+var HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
+  template: __dirname + '/public/index.html',
+  filename: 'index.html',
+  inject: 'body'
+});
+
+
 module.exports = {
   entry: "./client/index.jsx",
   output: {
@@ -9,7 +16,6 @@ module.exports = {
     publicPath: '/',
     filename: "bundle.js",
   },
-  plugins: [new HtmlWebpackPlugin()],
   module: {
     rules: [
       {
