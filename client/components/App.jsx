@@ -26,11 +26,11 @@ class App extends React.Component {
 
   fetchProductPlatform(productId) {
     return { os: ["urlLinux", "urlWindows"] };
-  }
+  } 
 
   fetchProductPriceAndPromo(productId) {
 
-    return axios.get(`/PriceAndPromotion/${productId}`)
+    return axios.get(`http://localhost:3006/PriceAndPromotion/${productId}`)
       .then((response) => {
         let data = response.data;
         console.log('Success getting price and promotion data: ', data);

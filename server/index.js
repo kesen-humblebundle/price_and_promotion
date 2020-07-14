@@ -17,8 +17,6 @@ app.get('/', (req, res) => {
   res.sendFile('index.html');
 });
 
-//app.get('endpoint', controller.getGameDocument);
-
 //returns an object that includes price, promotion/discount, start date, and expiry
 app.get('/PriceAndPromotion/:product_id', (req, res) => {
   console.log('Req rcvd by server with:', req.params);
@@ -44,6 +42,7 @@ app.get('/PriceAndPromotion/:product_id', (req, res) => {
 
 });
 
+//based on product number from URL,returns an object that includes price, promotion/discount, start date, and expiry
 app.get('/:product_id', (req, res) => {
   res.sendFile(path.resolve('public/index.html'));
 });
