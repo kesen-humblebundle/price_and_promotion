@@ -38,9 +38,10 @@ Run install and start scripts
 
 ## Requirements
 Note: this system uses MongoDB,follow these steps to ensure Mongo is installed and runnning
-  install mongo,
-  start mongodb from project root
-  in command line, run 'systemctl status mongod' to confirm if already running
+  install mongo, in command line
+    npm install mongodb --save
+  start mongodb from project root. in command line, run
+    systemctl status mongod
   if db server not already running, run systemctl start mongod
   run npm run seedDB
 

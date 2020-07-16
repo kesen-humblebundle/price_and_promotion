@@ -21,6 +21,21 @@ class App extends React.Component {
   }
 
   fetchImage(productId) {
+    //inbound and outbound rules  -- 
+    const requestURL = `http://ec2-52-14-126-227.us-east-2.compute.amazonaws.com:3001/api/${productId}?type=card`;
+
+    return axios.get(requestURL)
+      .then((response) => {
+        let data = response.data;
+
+        console.log('Success getting image from Micko: ', data);
+        return data;
+      })
+      .catch((err) => {
+        console.log('Error getting image from Micko: ', err);
+        return [];
+      });
+
     return "url1";
   }
 
@@ -30,10 +45,10 @@ class App extends React.Component {
 
   fetchProductPriceAndPromo(productId) {
 
-    return axios.get(`http://localhost:3006/PriceAndPromotion/${productId}`)
+    return axios.get(`/PriceAndPromotion/${productId}`)
       .then((response) => {
         let data = response.data;
-        
+
         console.log('Success getting price and promotion data: ', data);
         return data;
       })

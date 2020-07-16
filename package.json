@@ -4,7 +4,7 @@
   "description": "FEC UEDA Price and Promotion Service",
   "main": "index.js",
   "scripts": {
-     "test": "mocha ./test/test.js",
+    "test": "mocha ./test/test.js",
     "start:dev": "nodemon ./server/index.js",
     "start": "node index.js",
     "build": "webpack",
@@ -14,7 +14,7 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/KichiUeda/price_and_promotion.git"
-  },
+  }, 
   "author": "LachelleF",
   "license": "ISC",
   "bugs": {
