@@ -13,9 +13,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
 
-app.get('/', (req, res) => {
-  res.sendFile('index.html');
-});
+// app.get('/', (req, res) => {
+//   res.sendFile('index.html');
+// });
 
 //returns an object that includes price, promotion/discount, start date, and expiry
 app.get('/PriceAndPromotion/:product_id', (req, res) => {
