@@ -14,6 +14,7 @@ height: 24px;
 `;
 
 const Platforms = (props) => {
+  console.log('Platform props is an array:', props)
   return (
     <PlatformsStyled>
       <IconStyled>{props.platform}</IconStyled>

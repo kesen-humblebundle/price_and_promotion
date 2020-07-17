@@ -6,13 +6,19 @@ const ImageStyled = styled.div`
   background-color:  lightblue;
   height: 212.31px;
   width:100%;
-
+  `;
+const BackgroundImage = styled.div`
+  height: 212.31px;
+  width:100%;
   `;
 
 const PriceImage = (props) => {
+  console.log("PriceImage props: ", props)
   return (
     <ImageStyled>
-      {props.image}
+      <BackgroundImage>
+        <img src={props.image} />
+      </BackgroundImage>
     </ImageStyled>
   );
 };
