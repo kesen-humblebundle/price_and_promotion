@@ -21,8 +21,8 @@ class App extends React.Component {
   }
 
   fetchImage(productId) {
-    //inbound and outbound rules  -- 
-    const requestURL = `http://ec2-52-14-126-227.us-east-2.compute.amazonaws.com:3001/api/${productId}?type=card`;
+
+    const requestURL = `http://ec2-52-14-126-227.us-east-2.compute.amazonaws.com:3001/api/${productId}?type=cover`;
 
     return axios.get(requestURL)
       .then((response) => {
@@ -36,11 +36,22 @@ class App extends React.Component {
         return [];
       });
 
-    return "url1";
+    //return requestURL;
   }
 
   fetchProductPlatform(productId) {
-    return { os: ["urlLinux", "urlWindows"] };
+    const requestURL = `http://ec2-18-217-86-248.us-east-2.compute.amazonaws.com:3002/system_req/platforms/${productId}`
+    return axios.get(requestURL, {crossdomain: true})
+      .then((response) => {
+        let data = response.data;
+        console.log('Success getting platforms from Chris: ', data);
+        return data;
+      })
+      .catch((err) => {
+        console.log('Error getting platforms from Chris: ', err);
+        return [];
+      });
+    //return { os: ["urlLinux", "urlWindows"] };
   }
 
   fetchProductPriceAndPromo(productId) {
@@ -81,19 +92,34 @@ class App extends React.Component {
   componentDidMount() {
 
     let productId = this.getProductIdFromUrl();
-
-    this.fetchProductPriceAndPromo(productId).then(ret => {
-      let data = {};
-
-      data.price = ret.price;
-      data.promotion = ret.promotion;
-      data.image = this.fetchImage(productId);
-      data.platforms = this.fetchProductPlatform(productId);
-
-      console.log("data: ", data);
-
-      this.setState(data);
-    });
+    let data = {};
+    this.fetchProductPriceAndPromo(productId)
+      .then(ret => {
+        data.price = ret.price;
+        data.promotion = ret.promotion;
+      })
+    return this.fetchImage(productId)
+      .then(image => {
+        console.log('image returned fr promise: ', image)
+        data.image = image;
+        console.log('data looks like this so far: ', data);
+        return this.fetchProductPlatform(productId)
+        .then(platforms => {
+          console.log("platforms data: ", platforms)
+          data.platforms = platforms;
+          this.setState(data);
+        })
+        // .then((data) => {
+        //   this.setState(data);
+        // })
+      })
+      // .then(platforms => {
+      //   console.log("platforms data: ", platforms)
+      //   data.platforms = platforms;
+      // })
+      // .then((data) => {
+      //   this.setState(data);
+      // })
   }
 
   render() {
