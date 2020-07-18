@@ -38,18 +38,18 @@ app.get('/PriceAndPromotion/:product_id', (req, res) => {
 });
 
 //returns price and promos for an array of product ids
-app.get('/PriceAndPromotion/multiple/:product_id', (req, res) => {
+app.get('/PriceAndPromotion/multiple/:product_ids', (req, res) => {
   console.log('Req rcvd by server with:', req.params);
-  let arrayOfIds = JSON.parse(req.params.productId);
+  let arrayOfIds = JSON.parse(req.params.product_ids);
   let dataBundle = async () => {
     let priceAndPromosArray = []
     for (let i = 0; i < arrayOfIds.length; i++) {
       await PriceAndPromo.find({ product_id: arrayOfIds[i] })
-        .then((docs) => {
+        .then((doc) => {
           let data = {
-            product_id: docs[0].product_id,
-            price: docs[0].price,
-            promotion: docs[0].discount
+            product_id: doc[0].product_id,
+            price: doc[0].price,
+            promotion: doc[0].discount
           }
           priceAndPromosArray.push(data);
           console.log('In server, price and promo array from db: ', priceAndPromosArray);
