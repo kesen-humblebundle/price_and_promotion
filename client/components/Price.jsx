@@ -6,7 +6,7 @@ const PriceStyled = styled.div`
   text-align: right;
   height: 42.66px;
   width: 100%;
-  font-size: 1.4em;
+  font-size: 2.4em;
   font-weight: bold;
   color: white;
   margin-bottom: 24px;

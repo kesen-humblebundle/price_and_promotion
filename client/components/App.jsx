@@ -40,8 +40,8 @@ class App extends React.Component {
   }
 
   fetchProductPlatform(productId) {
-    const requestURL = `http://ec2-18-217-86-248.us-east-2.compute.amazonaws.com:3002/system_req/platforms/${productId}`
-    return axios.get(requestURL, {crossdomain: true})
+    const requestURL = `http://ec2-18-188-248-102.us-east-2.compute.amazonaws.com:3002/system_req/platforms/${productId}`
+     return axios.get(requestURL, {crossdomain: true})
       .then((response) => {
         let data = response.data;
         console.log('Success getting platforms from Chris: ', data);

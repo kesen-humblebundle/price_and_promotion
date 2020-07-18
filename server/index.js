@@ -39,7 +39,6 @@ app.get('/PriceAndPromotion/:product_id', (req, res) => {
     .catch(err => {
       res.status(404).send(err);
     });
-
 });
 
 //based on product number from URL,returns an object that includes price, promotion/discount, start date, and expiry

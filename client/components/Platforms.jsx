@@ -1,23 +1,29 @@
 import React from 'react';
 import styled from 'styled-components';
 
+// const PlatformsStyled = styled.div`
+// background: 1b1e1b;
+// text-align: left;
+// padding-left: 4px;
+// height: 25px;
+// `;
+
+
 const PlatformsStyled = styled.div`
-background: 1b1e1b;
-text-align: left;
-padding-left: 4px;
-height: 25px;
+  height: 24px;
+ 
 `;
 
-const IconStyled = styled.div`
-color: white;
-height: 24px;
-`;
-
+//what i get back from Chris is array of string inside of props.platforms
 const Platforms = (props) => {
-  console.log('Platform props is an array:', props)
+  const platforms = props.platforms;
+  const platformsArray = platforms.map((platform, index) => {
+    console.log('platform and index via map: ', platform, index)
+    return <img src={platform} alt="platform icon" width="21px" key={index}></img>;
+  });
   return (
     <PlatformsStyled>
-      <IconStyled>{props.platform}</IconStyled>
+      {platformsArray}
     </PlatformsStyled>
   );
 };

@@ -17,7 +17,7 @@ const PriceImage = (props) => {
   return (
     <ImageStyled>
       <BackgroundImage>
-        <img src={props.image} />
+        <img src={props.image}></img>
       </BackgroundImage>
     </ImageStyled>
   );
