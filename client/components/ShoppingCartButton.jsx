@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+//import {shopping} from '@styled-icons/entypo/ShoppingCart'
 
 const ShoppingCartButtonStyled = styled.button`
   background: #9cb946;
@@ -11,7 +12,13 @@ const ShoppingCartButtonStyled = styled.button`
   color: white;
   font-size: 1.25em;
   font-weight: bold;
+  text-transform: uppercase;
+  border: none;
 `;
+
+// const Shopping = styled(shopping)`
+//   color: red;
+// `
 
 const ShoppingCartButton = (props) => {
   return (

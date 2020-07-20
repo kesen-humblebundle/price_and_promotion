@@ -40,8 +40,8 @@ class App extends React.Component {
   }
 
   fetchProductPlatform(productId) {
-    const requestURL = `http://ec2-18-217-86-248.us-east-2.compute.amazonaws.com:3002/system_req/platforms/${productId}`
-    return axios.get(requestURL, {crossdomain: true})
+    const requestURL = `http://ec2-3-129-17-68.us-east-2.compute.amazonaws.com:3002/system_req/platforms/${productId}`
+    return axios.get(requestURL, { crossdomain: true })
       .then((response) => {
         let data = response.data;
         console.log('Success getting platforms from Chris: ', data);
@@ -104,22 +104,12 @@ class App extends React.Component {
         data.image = image;
         console.log('data looks like this so far: ', data);
         return this.fetchProductPlatform(productId)
-        .then(platforms => {
-          console.log("platforms data: ", platforms)
-          data.platforms = platforms;
-          this.setState(data);
-        })
-        // .then((data) => {
-        //   this.setState(data);
-        // })
+          .then(platforms => {
+            console.log("platforms data: ", platforms)
+            data.platforms = platforms;
+            this.setState(data);
+          })
       })
-      // .then(platforms => {
-      //   console.log("platforms data: ", platforms)
-      //   data.platforms = platforms;
-      // })
-      // .then((data) => {
-      //   this.setState(data);
-      // })
   }
 
   render() {
