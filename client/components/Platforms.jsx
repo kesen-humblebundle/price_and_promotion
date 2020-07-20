@@ -16,10 +16,10 @@ const Platforms = (props) => {
   const platforms = props.platforms.platforms;
   const os = props.platforms.os;
   let combined = platforms.concat(os);
-  //console.log('array of platforms and os: ', combined);
+  console.log('array of platforms and os: ', combined);
   const platformsArray = combined.map((platform, index) => {
-    //console.log('platform and index via map: ', platform, index)
-    return <img src={platform} alt="platform icon" width="21px" key={index}></img>;
+    console.log('platform and index via map: ', platform, index)
+    return <img src={{platform}} alt="platform icon" width="21px" key={index}></img>;
   });
   return (
     <PlatformsStyled>

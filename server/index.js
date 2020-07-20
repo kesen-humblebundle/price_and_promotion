@@ -41,18 +41,21 @@ app.get('/PriceAndPromotion/:product_id', (req, res) => {
 app.get('/PriceAndPromotion/multiple/:product_ids', (req, res) => {
   console.log('Req rcvd by server with:', req.params);
   let arrayOfIds = JSON.parse(req.params.product_ids);
+  console.log('Array of product ids parsed out: ', arrayOfIds);
   let dataBundle = async () => {
     let priceAndPromosArray = []
     for (let i = 0; i < arrayOfIds.length; i++) {
       await PriceAndPromo.find({ product_id: arrayOfIds[i] })
         .then((doc) => {
+          console.log('doc from db: ', doc)
           let data = {
             product_id: doc[0].product_id,
             price: doc[0].price,
             promotion: doc[0].discount
           }
+          console.log('data being pushed into price and promo array by svr fr db: ', data);
           priceAndPromosArray.push(data);
-          console.log('In server, price and promo array from db: ', priceAndPromosArray);
+          console.log('In server, priceAndPromo array from db: ', priceAndPromosArray);
         })
         .catch(err => console.log(err))
     }
