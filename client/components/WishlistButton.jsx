@@ -8,6 +8,9 @@ height: 24.86px;
 border-radius: 2px;
 width: 95%;
 margin: 0 auto;
+font-weight: bold;
+text-transform: uppercase;
+border: none;
 `;
 
 const WishlistButton = (props) => {
