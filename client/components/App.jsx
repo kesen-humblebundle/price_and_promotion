@@ -71,7 +71,9 @@ class App extends React.Component {
 
   getProductId(path) {
     console.log('this.getProductId call success path=', path);
-    if (path !== null) {
+    if (path === '/') {
+      return DEFAULT_PRODUCT_ID;
+    } else {
       let pathArray = path.split('/');
       if (pathArray.length > 0) {
         let productId = Number(pathArray[pathArray.length - 1]);
@@ -81,7 +83,6 @@ class App extends React.Component {
         }
       }
     }
-    return DEFAULT_PRODUCT_ID;
   }
 
   getProductIdFromUrl() {
