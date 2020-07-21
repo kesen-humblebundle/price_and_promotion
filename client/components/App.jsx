@@ -56,7 +56,7 @@ class App extends React.Component {
 
   fetchProductPriceAndPromo(productId) {
 
-    return axios.get(`ec2-3-128-28-100.us-east-2.compute.amazonaws.com/PriceAndPromotion/${productId}`)
+    return axios.get(`ec2-3-128-28-100.us-east-2.compute.amazonaws.com:3006/PriceAndPromotion/${productId}`)
       .then((response) => {
         let data = response.data;
 
