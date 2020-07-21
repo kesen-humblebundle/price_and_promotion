@@ -10,6 +10,7 @@ import styled from 'styled-components';
 
 const PlatformsStyled = styled.div`
   height: 24px;
+  float: left;
 `;
 
 const Platforms = (props) => {
@@ -19,7 +20,7 @@ const Platforms = (props) => {
   console.log('array of platforms and os: ', combined);
   const platformsArray = combined.map((platform, index) => {
     console.log('platform and index via map: ', platform, index)
-    return <img src={{platform}} alt="platform icon" width="21px" key={index}></img>;
+    return <img src={platform} alt="platform icon" width="21px" key={index}></img>;
   });
   return (
     <PlatformsStyled>
