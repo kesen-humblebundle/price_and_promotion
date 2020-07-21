@@ -56,7 +56,7 @@ class App extends React.Component {
 
   fetchProductPriceAndPromo(productId) {
 
-    return axios.get(`ec2-3-128-28-100.us-east-2.compute.amazonaws.com:3006/PriceAndPromotion/${productId}`)
+    return axios.get(`http://ec2-3-128-28-100.us-east-2.compute.amazonaws.com:3006/PriceAndPromotion/${productId}`)
       .then((response) => {
         let data = response.data;
 
@@ -71,22 +71,23 @@ class App extends React.Component {
 
   getProductId(path) {
     console.log('this.getProductId call success path=', path);
-    if (path === '/') {
-      return DEFAULT_PRODUCT_ID;
-    } else {
-      let pathArray = path.split('/');
-      if (pathArray.length > 0) {
-        let productId = Number(pathArray[pathArray.length - 1]);
-        if (productId !== NaN) {
-          console.log('success pulling and parsing id: ', productId);
-          return (productId);
-        }
+
+    let pathArray = path.split('/');
+    if (pathArray.length > 0) {
+      let productId = Number(pathArray[pathArray.length - 1]);
+      if (productId !== NaN) {
+        console.log('success pulling and parsing id: ', productId);
+        return (productId);
       }
     }
+
   }
 
   getProductIdFromUrl() {
     console.log('get id from URL called successfully. ', window.location.pathname);
+    if (window.location.pathname === '/') {
+      return 21;
+    }
     return this.getProductId(window.location.pathname);
   }
 
