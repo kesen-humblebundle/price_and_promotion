@@ -80,7 +80,6 @@ class App extends React.Component {
         return (productId);
       }
     }
-
   }
 
   getProductIdFromUrl() {
@@ -100,7 +99,7 @@ class App extends React.Component {
         data.price = ret.price;
         data.promotion = ret.promotion;
       })
-    return this.fetchImage(productId)
+      return this.fetchImage(productId)
       .then(image => {
         console.log('image returned fr promise: ', image)
         data.image = image;
