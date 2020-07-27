@@ -14,18 +14,17 @@ const ShoppingCartButtonStyled = styled.button`
   font-weight: bold;
   text-transform: uppercase;
   border: none;
+  &:hover {
+    background: #708238;
+  }
 `;
-
-// const Shopping = styled(shopping)`
-//   color: red;
-// `
 
 const ShoppingCartButton = (props) => {
   return (
-    <ShoppingCartButtonStyled><i className="hb hb-shopping-cart-solid::before"></i> Add to Cart</ShoppingCartButtonStyled>
+    <ShoppingCartButtonStyled><i className="fa fa-shopping-cart"></i> Add to Cart</ShoppingCartButtonStyled>
   );
 };
-
+ 
 export default ShoppingCartButton;
 
 

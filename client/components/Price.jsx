@@ -9,7 +9,7 @@ const PriceStyled = styled.div`
   font-size: 2.4em;
   font-weight: bold;
   color: white;
-  margin-bottom: 24px;
+  margin-bottom: 50px;
 `;
 
 const Price = (props) => {
