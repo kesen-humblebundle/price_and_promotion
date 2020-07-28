@@ -1,7 +1,7 @@
 require('dotenv').config(); //loading environment lets
 const express = require('express');
 const app = express();
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3006;
 const path = require('path');
 const bodyParser = require('body-parser');
 const PriceAndPromo = require('../database/index.js');
