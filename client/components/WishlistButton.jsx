@@ -19,9 +19,9 @@ border: none;
 const WishlistButton = (props) => {
   return (
 
-    <WishlistButtonStyled><span class="fa fa-star"></span>Add to Wishlist</WishlistButtonStyled>
+    <WishlistButtonStyled><span className="fa fa-star"></span>Add to Wishlist</WishlistButtonStyled>
 
   );
 };
 
-export default WishlistButton; 
+export default WishlistButton;

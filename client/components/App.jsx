@@ -4,7 +4,7 @@ import PriceAndPromoContainer from "./PriceAndPromoContainer.jsx";
 import PriceImage from "./PriceImage.jsx"
 import axios from 'axios';
 
-const AppStyled = styled.div`
+const AppStyledForPricePromo = styled.div`
   font-family: 'Lucida Grande', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 13px;
   width:370.5px;
@@ -119,14 +119,14 @@ class App extends React.Component {
       return (null);
     console.log('state in render: ', this.state)
     return (
-      <AppStyled>
+      <AppStyledForPricePromo>
         <PriceImage image={this.state.image} />
         <PriceAndPromoContainer values={{
           platforms: this.state.platforms,
           price: this.state.price,
           promotion: this.state.promotion
         }} />
-      </AppStyled>
+      </AppStyledForPricePromo>
     );
   }
 }

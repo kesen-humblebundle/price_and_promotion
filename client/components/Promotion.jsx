@@ -35,10 +35,6 @@ const SpanO = styled.span `
 const Promotion = (props) => {
   return (
     <PromotionButton>
-      {/* <a href="/subscription" className="rewards-monthly-section" target="_blank" >
-        Save an additional  <span className="green">{`$${props.promotion}`}</span> with <span className="orange">Humble Choice</span>
-      </a> */}
-      {/* <Span>Save an additional <span className="green">{`$${props.promotion}`}</span> with <span className="orange">Humble Choice</span></Span> */}
       <Span>Save an additional <SpanD>{`$${props.promotion}`}</SpanD> with <SpanO>Humble Choice</SpanO></Span>
     </PromotionButton>
   );
