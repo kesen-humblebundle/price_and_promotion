@@ -2,12 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 
-const ImageStyled = styled.div`
+const PriceImageStyled = styled.div`
   background-color:  lightblue;
   height: 212.31px;
   width:100%;
   `;
-const BackgroundImage = styled.div`
+const PriceBackgroundImage = styled.div`
   height: 212.31px;
   width:100%;
   `;
@@ -15,11 +15,11 @@ const BackgroundImage = styled.div`
 const PriceImage = (props) => {
   console.log("PriceImage props: ", props)
   return (
-    <ImageStyled>
-      <BackgroundImage>
+    <PriceImageStyled>
+      <PriceBackgroundImage>
         <img src={props.image} width="100%" height="212.31px"></img>
-      </BackgroundImage>
-    </ImageStyled>
+      </PriceBackgroundImage>
+    </PriceImageStyled>
   );
 };
 
