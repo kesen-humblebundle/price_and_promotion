@@ -11,14 +11,17 @@ margin: 0 auto;
 font-weight: bold;
 text-transform: uppercase;
 border: none;
+&:hover {
+  color: orange;
+}
 `;
 
 const WishlistButton = (props) => {
   return (
 
-    <WishlistButtonStyled>Add to Wishlist</WishlistButtonStyled>
+    <WishlistButtonStyled><span class="fa fa-star"></span>Add to Wishlist</WishlistButtonStyled>
 
   );
 };
 
-export default WishlistButton;
+export default WishlistButton; 
