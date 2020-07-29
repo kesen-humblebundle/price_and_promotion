@@ -10,8 +10,9 @@ const AppStyledForPricePromo = styled.div`
   width:370.5px;
   height: 431.5px;
   background: #1b1e1b;
+  margin-top: 20px;
 `;
-
+//padding-top:20px;  -- per chat with Micko pad such that the entire module floats down 20 pixels to align with his video monitor on my left
 const DEFAULT_PRODUCT_ID = 21;
 
 class App extends React.Component {
