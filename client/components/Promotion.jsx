@@ -13,7 +13,7 @@ display: inline-block;
 border: none;
 `;
 
-const Span = styled.span`
+const SpanText = styled.span`
   color: #d0d5e1;
   font-size: .95em;
   font-weight: bold;
@@ -21,12 +21,12 @@ const Span = styled.span`
   text-shadow: 0 2px 0 rgba(63,68,80,0.35);
 `;
 
-const SpanD = styled.span`
+const SpanDiscount = styled.span`
 color: #AEFF14;
 font-size: .95em;
 `;
 
-const SpanO = styled.span `
+const SpanOrange = styled.span`
   color: orange;
   font-size: .95em;
 `;
@@ -34,8 +34,8 @@ const SpanO = styled.span `
 //NOTE this is a HREF. use spans
 const Promotion = (props) => {
   return (
-    <PromotionButton>
-      <Span>Save an additional <SpanD>{`$${props.promotion}`}</SpanD> with <SpanO>Humble Choice</SpanO></Span>
+    <PromotionButton className='pricePromo-promotion-discount'>
+      <SpanText className='pricePromo-promotion-discount-span-text'>Save an additional <SpanDiscount className='pricePromo-promotion-discount-span-discount' >{`$${props.promotion}`}</SpanDiscount> with <SpanOrange className='pricePromo-promotion-discount-span-orange'>Humble Choice</SpanOrange></SpanText>
     </PromotionButton>
   );
 };
