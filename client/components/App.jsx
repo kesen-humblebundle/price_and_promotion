@@ -28,15 +28,13 @@ class App extends React.Component {
       .then((response) => {
         let data = response.data;
 
-        console.log('Success getting image from Micko: ', data);
+        console.log('$$$$$$$$ PIP  Success getting image from Micko: ', data);
         return data;
       })
       .catch((err) => {
-        console.log('Error getting image from Micko: ', err);
+        console.log('$$$$$$$$ PIP  Error getting image from Micko: ', err);
         return [];
       });
-
-    //return requestURL;
   }
 
   fetchProductPlatform(productId) {
@@ -44,14 +42,13 @@ class App extends React.Component {
     return axios.get(requestURL, { crossdomain: true })
       .then((response) => {
         let data = response.data;
-        console.log('Success getting platforms from Chris: ', data);
+        console.log('$$$$$$$$ PIP  Success getting platforms from Chris: ', data);
         return data;
       })
       .catch((err) => {
-        console.log('Error getting platforms from Chris: ', err);
+        console.log('$$$$$$$$ PIP  Error getting platforms from Chris: ', err);
         return [];
       });
-    //return { os: ["urlLinux", "urlWindows"] };
   }
 
   fetchProductPriceAndPromo(productId) {
@@ -60,30 +57,30 @@ class App extends React.Component {
       .then((response) => {
         let data = response.data;
 
-        console.log('Success getting price and promotion data: ', data);
+        console.log('$$$$$$$$ PIP Success getting price and promotion data: ', data);
         return data;
       })
       .catch((err) => {
-        console.log('Error updating views: ', err);
+        console.log('$$$$$$$$ PIP Error updating views: ', err);
         return [];
       });
   }
 
   getProductId(path) {
-    console.log('this.getProductId call success path=', path);
+    console.log('$$$$$$$$ PIP  this.getProductId call success path=', path);
 
     let pathArray = path.split('/');
     if (pathArray.length > 0) {
-      let productId = Number(pathArray[pathArray.length - 1]);
+      let productId = Number(pathArray[1]);
       if (productId !== NaN) {
-        console.log('success pulling and parsing id: ', productId);
+        console.log('$$$$$$$$ PIP  success pulling and parsing id: ', productId);
         return (productId);
       }
     }
   }
 
   getProductIdFromUrl() {
-    console.log('get id from URL called successfully. ', window.location.pathname);
+    console.log('$$$$$$$$ PIP  get id from URL called successfully. ', window.location.pathname);
     if (window.location.pathname === '/') {
       return 21;
     }
@@ -101,12 +98,12 @@ class App extends React.Component {
       })
     return this.fetchImage(productId)
       .then(image => {
-        console.log('image returned fr promise: ', image)
+        console.log('$$$$$$$$ PIP  image returned fr promise: ', image)
         data.image = image;
-        console.log('data looks like this so far: ', data);
+        console.log('$$$$$$$$ PIP data looks like this so far: ', data);
         return this.fetchProductPlatform(productId)
           .then(platforms => {
-            console.log("platforms data: ", platforms)
+            console.log("PIP platforms data: ", platforms)
             data.platforms = platforms;
             this.setState(data);
           })
@@ -117,7 +114,7 @@ class App extends React.Component {
 
     if (!this.state)
       return (null);
-    console.log('state in render: ', this.state)
+    console.log('$$$$$$$$ PIP  state in render: ', this.state)
     return (
       <AppStyledForPricePromo className='pricePromo-app'>
         <PriceImage className='pricePromo-app-image-component' image={this.state.image} />
