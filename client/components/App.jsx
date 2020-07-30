@@ -12,8 +12,6 @@ const AppStyledForPricePromo = styled.div`
   background: #1b1e1b;
 `;
 
-
-
 const DEFAULT_PRODUCT_ID = 21;
 
 class App extends React.Component {
