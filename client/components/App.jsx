@@ -10,9 +10,8 @@ const AppStyledForPricePromo = styled.div`
   width:370.5px;
   height: 431.5px;
   background: #1b1e1b;
-  margin-top: 20px;
 `;
-//padding-top:20px;  -- per chat with Micko pad such that the entire module floats down 20 pixels to align with his video monitor on my left
+
 const DEFAULT_PRODUCT_ID = 21;
 
 class App extends React.Component {
@@ -100,7 +99,7 @@ class App extends React.Component {
         data.price = ret.price;
         data.promotion = ret.promotion;
       })
-      return this.fetchImage(productId)
+    return this.fetchImage(productId)
       .then(image => {
         console.log('image returned fr promise: ', image)
         data.image = image;
@@ -120,9 +119,9 @@ class App extends React.Component {
       return (null);
     console.log('state in render: ', this.state)
     return (
-      <AppStyledForPricePromo>
-        <PriceImage image={this.state.image} />
-        <PriceAndPromoContainer values={{
+      <AppStyledForPricePromo className='pricePromo-app'>
+        <PriceImage className='pricePromo-app-image-component' image={this.state.image} />
+        <PriceAndPromoContainer className='pricePromo-app-price-promo-component' values={{
           platforms: this.state.platforms,
           price: this.state.price,
           promotion: this.state.promotion

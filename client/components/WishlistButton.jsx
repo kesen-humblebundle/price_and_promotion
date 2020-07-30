@@ -19,7 +19,7 @@ border: none;
 const WishlistButton = (props) => {
   return (
 
-    <WishlistButtonStyled><span className="fa fa-star"></span>Add to Wishlist</WishlistButtonStyled>
+    <WishlistButtonStyled className='pricePromo-wishlist-button'><span className="fa fa-star"></span>Add to Wishlist</WishlistButtonStyled>
 
   );
 };

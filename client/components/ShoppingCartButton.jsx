@@ -21,10 +21,10 @@ const ShoppingCartButtonStyled = styled.button`
 
 const ShoppingCartButton = (props) => {
   return (
-    <ShoppingCartButtonStyled><i className="fa fa-shopping-cart"></i> Add to Cart</ShoppingCartButtonStyled>
+    <ShoppingCartButtonStyled className='pricePromo-shopping-cart-button'><i className="fa fa-shopping-cart"></i> Add to Cart</ShoppingCartButtonStyled>
   );
 };
- 
+
 export default ShoppingCartButton;
 
 

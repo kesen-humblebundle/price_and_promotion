@@ -12,20 +12,20 @@ const Platforms = (props) => {
 
   const platformsArray = platforms.map((platform, index) => {
     console.log('platform data being accessed: ', platform[index])
-    return <img src={platform[1]} alt="platform icon" width="21px" key={index}></img>;
+    return <img className='pricePromo-img-platforms-platform' src={platform[1]} alt="platform icon" width="21px" key={index}></img>;
   });
 
   const osArray = os.map((os, index) => {
     console.log('os data being accessed: ', os[index])
-    return <img src={os[1]} alt="platform icon" width="21px" key={index}></img>;
+    return <img className='pricePromo-img-platforms-os' src={os[1]} alt="platform icon" width="21px" key={index}></img>;
   });
 
   return (
-    <PlatformsStyled>
+    <PlatformsStyled className='pricePromo-platforms'>
       {platformsArray}{osArray}
     </PlatformsStyled>
   );
-  
+
 };
 
 export default Platforms;

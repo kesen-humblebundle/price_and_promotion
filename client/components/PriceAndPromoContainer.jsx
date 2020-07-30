@@ -19,10 +19,10 @@ const PriceAndPromoContainer = (props) => {
   console.log('priceAndPromos props: ', props);
   return (
 
-    <PriceContainer>
-      <Platforms platforms={values.platforms} />
-      <Price price={values.price} />
-      <Promotion promotion={values.promotion} />
+    <PriceContainer className='pricePromo-container-outer'>
+      <Platforms className='pricePromo-container-outer-platforms' platforms={values.platforms} />
+      <Price className='pricePromo-container-outer-price' price={values.price} />
+      <Promotion className='pricePromo-container-outer-promotion' promotion={values.promotion} />
       <ShoppingCartButton />
       <WishlistButton />
     </PriceContainer>
