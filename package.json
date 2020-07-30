@@ -7,7 +7,7 @@
     "test": "mocha ./test/test.js",
     "start:dev": "nodemon ./server/index.js",
     "start": "node ./server/index.js",
-    "build": "webpack",
+    "build": "webpack -p",
     "react:dev": "webpack --watch -d",
     "seeddb": "node ./database/seed.js"
   },
@@ -48,7 +48,7 @@
     "@babel/preset-react": "^7.10.1",
     "@shelf/jest-mongodb": "^1.1.5",
     "babel-jest": "^26.0.1",
-    "babel-plugin-styled-components": "^1.11.0",
+    "babel-plugin-styled-components": "^1.11.1",
     "chai": "^4.2.0",
     "chai-enzyme": "^1.0.0-beta.1",
     "html-webpack-plugin": "^4.3.0",
