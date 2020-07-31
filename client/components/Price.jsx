@@ -15,10 +15,11 @@ const PriceStyled = styled.div`
 `;
 
 const Price = (props) => {
-  console.log('Price props: ', props)
+
   return (
     <PriceStyled className='pricePromo-price'>{`$ ${props.price}`}</PriceStyled>
   );
+  
 };
 
 export default Price;

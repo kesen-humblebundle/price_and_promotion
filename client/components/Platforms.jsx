@@ -11,16 +11,15 @@ const PlatformsStyled = styled.div`
 `;
 
 const Platforms = (props) => {
+  
   const platforms = props.platforms.platforms;
   const os = props.platforms.os;
 
   const platformsArray = platforms.map((platform, index) => {
-    console.log('platform data being accessed: ', platform[index])
     return <img className='pricePromo-img-platforms-platform' src={platform[1]} alt="platform icon" width="21px" key={index}></img>;
   });
 
   const osArray = os.map((os, index) => {
-    console.log('os data being accessed: ', os[index])
     return <img className='pricePromo-img-platforms-os' src={os[1]} alt="platform icon" width="21px" key={index}></img>;
   });
 
