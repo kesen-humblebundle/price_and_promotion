@@ -4,15 +4,15 @@ import styled from 'styled-components';
 
 const ShoppingCartButtonStyled = styled.button`
   background: #9cb946;
-  width:100%;
   height: 54.66px;
-  width: 95%;
+  width: 338.5px;
   margin: 0 auto;
-  margin-bottom: 2px;
+  margin-bottom: 3px;
   color: white;
   font-size: 1.25em;
   font-weight: bold;
   text-transform: uppercase;
+  border-radius: 4px;
   border: none;
   &:hover {
     background: #708238;
