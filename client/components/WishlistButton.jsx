@@ -5,8 +5,8 @@ const WishlistButtonStyled = styled.button`
 color: #a3a3a3;
 background: #2e2f2d;
 height: 24.86px;
-border-radius: 2px;
-width: 95%;
+border-radius: 3px;
+width: 338.5px;
 margin: 0 auto;
 font-weight: bold;
 text-transform: uppercase;

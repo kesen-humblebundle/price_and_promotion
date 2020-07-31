@@ -5,8 +5,8 @@ const PromotionButton = styled.button`
 background: black;
 color:white;
 height: 31.97px;
-border-radius: 2px;
-width: 95%;
+border-radius: 3px;
+width: 338.5px;
 margin: 0 auto;
 margin-bottom: 2px;
 display: inline-block;
