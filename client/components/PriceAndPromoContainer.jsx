@@ -15,10 +15,10 @@ const PriceContainer = styled.div`
 `;
 
 const PriceAndPromoContainer = (props) => {
-  let values = props.values;
-  console.log('priceAndPromos props: ', props);
-  return (
 
+  let values = props.values;
+
+  return (
     <PriceContainer className='pricePromo-container-outer'>
       <Platforms className='pricePromo-container-outer-platforms' platforms={values.platforms} />
       <Price className='pricePromo-container-outer-price' price={values.price} />
@@ -26,8 +26,8 @@ const PriceAndPromoContainer = (props) => {
       <ShoppingCartButton />
       <WishlistButton />
     </PriceContainer>
-
   );
+  
 };
 
 export default PriceAndPromoContainer;

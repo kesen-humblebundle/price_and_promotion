@@ -48,7 +48,6 @@ let seedToDB = function () {
   return db.collection.insertMany(data)
     //response fr db
     .then(result => {
-      console.log('Successfully inserted items: ', result);
       return result;
     })
     .catch(err => console.error(`Failed to insert documents: ${err}`));

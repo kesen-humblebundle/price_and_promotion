@@ -27,12 +27,9 @@ class App extends React.Component {
     return axios.get(requestURL)
       .then((response) => {
         let data = response.data;
-
-        console.log('$$$$$$$$ PIP  Success getting image from Micko: ', data);
         return data;
       })
       .catch((err) => {
-        console.log('$$$$$$$$ PIP  Error getting image from Micko: ', err);
         return [];
       });
   }
@@ -42,11 +39,9 @@ class App extends React.Component {
     return axios.get(requestURL, { crossdomain: true })
       .then((response) => {
         let data = response.data;
-        console.log('$$$$$$$$ PIP  Success getting platforms from Chris: ', data);
         return data;
       })
       .catch((err) => {
-        console.log('$$$$$$$$ PIP  Error getting platforms from Chris: ', err);
         return [];
       });
   }
@@ -56,31 +51,25 @@ class App extends React.Component {
     return axios.get(`http://ec2-3-128-28-100.us-east-2.compute.amazonaws.com:3006/PriceAndPromotion/${productId}`)
       .then((response) => {
         let data = response.data;
-
-        console.log('$$$$$$$$ PIP Success getting price and promotion data: ', data);
         return data;
       })
       .catch((err) => {
-        console.log('$$$$$$$$ PIP Error updating views: ', err);
         return [];
       });
   }
 
   getProductId(path) {
-    console.log('$$$$$$$$ PIP  this.getProductId call success path=', path);
 
     let pathArray = path.split('/');
     if (pathArray.length > 0) {
       let productId = Number(pathArray[1]);
       if (productId !== NaN) {
-        console.log('$$$$$$$$ PIP  success pulling and parsing id: ', productId);
         return (productId);
       }
     }
   }
 
   getProductIdFromUrl() {
-    console.log('$$$$$$$$ PIP  get id from URL called successfully. ', window.location.pathname);
     if (window.location.pathname === '/') {
       return 21;
     }
@@ -98,12 +87,9 @@ class App extends React.Component {
       })
     return this.fetchImage(productId)
       .then(image => {
-        console.log('$$$$$$$$ PIP  image returned fr promise: ', image)
         data.image = image;
-        console.log('$$$$$$$$ PIP data looks like this so far: ', data);
         return this.fetchProductPlatform(productId)
           .then(platforms => {
-            console.log("PIP platforms data: ", platforms)
             data.platforms = platforms;
             this.setState(data);
           })
@@ -114,7 +100,6 @@ class App extends React.Component {
 
     if (!this.state)
       return (null);
-    console.log('$$$$$$$$ PIP  state in render: ', this.state)
     return (
       <AppStyledForPricePromo className='pricePromo-app'>
         <PriceImage className='pricePromo-app-image-component' image={this.state.image} />
