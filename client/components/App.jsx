@@ -20,6 +20,7 @@ class App extends React.Component {
     this.state = null;
   }
 
+  /* Inherited Code, Not Needed */
   fetchImage(productId) {
 
     const requestURL = `http://ec2-52-14-126-227.us-east-2.compute.amazonaws.com:3001/api/${productId}?type=cover`;
@@ -34,6 +35,7 @@ class App extends React.Component {
       });
   }
 
+  /* Inherited Code, Not Needed */
   fetchProductPlatform(productId) {
     const requestURL = `http://ec2-3-129-17-68.us-east-2.compute.amazonaws.com:3002/system_req/platforms/${productId}`
     return axios.get(requestURL, { crossdomain: true })
@@ -48,7 +50,9 @@ class App extends React.Component {
 
   fetchProductPriceAndPromo(productId) {
 
-    return axios.get(`http://ec2-3-128-28-100.us-east-2.compute.amazonaws.com:3006/PriceAndPromotion/${productId}`)
+    const deployedURL = `http://ec2-3-128-28-100.us-east-2.compute.amazonaws.com:3006/PriceAndPromotion/${productId}`;
+    const localURL = `http://localhost:3006/PriceAndPromotion/${productId}`;
+    return axios.get(localURL)
       .then((response) => {
         let data = response.data;
         return data;
@@ -84,16 +88,50 @@ class App extends React.Component {
       .then(ret => {
         data.price = ret.price;
         data.promotion = ret.promotion;
+
+        /* hardcode dependent services */
+        data.image = 'https://i.picsum.photos/id/1003/1181/1772.jpg?hmac=oN9fHMXiqe9Zq2RM6XT-RVZkojgPnECWwyEF1RvvTZk'
+        data.platforms =  {
+          "product_id": 45,
+          "platforms": [
+              [
+                  "https://res.cloudinary.com/overview/image/upload/t_icon/v1595370318/platformicons/OriginTransWhite_e0fbaw.png",
+                  "https://res.cloudinary.com/overview/image/upload/t_icon/v1595370318/platformicons/OriginTransMed_fmdgby.png",
+                  "https://res.cloudinary.com/overview/image/upload/t_icon/v1595370318/platformicons/OriginTransDark_anruok.png"
+              ]
+          ],
+          "os": [
+              [
+                  "https://res.cloudinary.com/overview/image/upload/t_icon/v1595370319/platformicons/WindowsTransWhite_jyl6ij.png",
+                  "https://res.cloudinary.com/overview/image/upload/t_icon/v1595370319/platformicons/WindowsTransMed_wyuamc.png",
+                  "https://res.cloudinary.com/overview/image/upload/t_icon/v1595370318/platformicons/WindowsTransDark_tsafuk.png"
+              ],
+              [
+                  "https://res.cloudinary.com/overview/image/upload/t_icon/v1595370318/platformicons/MacTransWhite_bdszac.png",
+                  "https://res.cloudinary.com/overview/image/upload/t_icon/v1595370318/platformicons/MacTransMed_zns8pf.png",
+                  "https://res.cloudinary.com/overview/image/upload/t_icon/v1595370318/platformicons/MacTransDark_czv6eo.png"
+              ],
+              [
+                  "https://res.cloudinary.com/overview/image/upload/t_icon/v1595370317/platformicons/LinuxTransWhite_twr4ue.png",
+                  "https://res.cloudinary.com/overview/image/upload/t_icon/v1595370317/platformicons/LinuxTransMed_pbn9i6.png",
+                  "https://res.cloudinary.com/overview/image/upload/t_icon/v1595370317/platformicons/LinuxTransDark_qwgcie.png"
+              ]
+          ]
+      };
+        this.setState(data);
       })
-    return this.fetchImage(productId)
-      .then(image => {
-        data.image = image;
-        return this.fetchProductPlatform(productId)
-          .then(platforms => {
-            data.platforms = platforms;
-            this.setState(data);
-          })
-      })
+
+     /*     Inherited Code dependent on other services   */
+
+    // return this.fetchImage(productId)
+    //   .then(image => {
+    //     data.image = image;
+    //     return this.fetchProductPlatform(productId)
+    //       .then(platforms => {
+    //         data.platforms = platforms;
+    //         this.setState(data);
+    //       })
+    //   })
   }
 
   render() {
