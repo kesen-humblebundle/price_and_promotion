@@ -64,6 +64,63 @@ app.get('/:product_id', (req, res) => {
   res.sendFile(path.resolve('public/index.html'));
 });
 
+//creates a new product
+app.post('/PriceAndPromotion', (req, res) => {
+
+  let priceAndPromotionData = req.body;
+  console.log(priceAndPromotionData);
+
+  let newPromoRecord = new PriceAndPromo(priceAndPromotionData);
+
+  let promise = newPromoRecord.save()
+
+  promise
+  .then( () => {
+    res.status(200);
+  })
+  .catch( (err) => {
+    res.status(404).send(err);
+  });
+
+});
+
+//edits a record based on product id
+app.put('/PriceAndPromotion/:product_id', (req, res) => {
+
+  let id = req.params.product_id;
+
+  PriceAndPromo.find({ product_id: id })
+  //   .then(game => {
+  //     if (!game) {
+  //       res.status(400).send('No game to return');
+  //     } else {
+  //       let data = {
+  //         price: game[0].price,
+  //         promotion: game[0].discount,
+  //       }
+  //       res.status(200).send(data);
+  //     }
+  //   })
+  //   .catch(err => {
+  //     res.status(404).send(err);
+  //   });
+});
+
+//deletes a record based on product id
+app.delete('/PriceAndPromotion/:product_id', (req, res) => {
+
+  let id = req.params.product_id;
+
+  PriceAndPromo.deleteOne({ product_id: id })
+  .then( () => {
+    res.status(200);
+  })
+  .catch( err => {
+    res.status(404).send(err);
+  });
+
+});
+
 app.listen(PORT, (error) => {
   if (error) {
     console.log('Server connection failed: ', error);
