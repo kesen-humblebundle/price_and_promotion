@@ -70,13 +70,9 @@ app.post('/PriceAndPromotion', (req, res) => {
   let priceAndPromotionData = req.body;
   console.log(priceAndPromotionData);
 
-  let newPromoRecord = new PriceAndPromo(priceAndPromotionData);
-
-  let promise = newPromoRecord.save()
-
-  promise
+  PriceAndPromo.create(priceAndPromotionData)
   .then( () => {
-    res.status(200);
+    res.status(200).end();
   })
   .catch( (err) => {
     res.status(404).send(err);
@@ -90,9 +86,9 @@ app.put('/PriceAndPromotion/:product_id', (req, res) => {
   let id = req.params.product_id;
   let newData = req.body;
 
-  PriceAndPromo.updateOne({ product_id: id }, newData)
+  return PriceAndPromo.updateOne({ product_id: id }, newData)
   .then( () => {
-    res.status(200);
+    res.status(200).end();
   })
   .catch((err) => {
     res.status(404).send(err);
@@ -106,7 +102,7 @@ app.delete('/PriceAndPromotion/:product_id', (req, res) => {
 
   PriceAndPromo.deleteOne({ product_id: id })
   .then( () => {
-    res.status(200);
+    res.status(200).end();
   })
   .catch( err => {
     res.status(404).send(err);
