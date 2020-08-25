@@ -56,9 +56,9 @@ npm install
 
 | HTTP Method | Route | Used For | Sample Data |
 | ---- | ---- | ---- | ---- |
-| GET | '/PriceAndPromotion/:product_id' | displays price, discount and start date based on product id in URL| `{ "_id" : ObjectId("5f41308b0b7e1f1e149894e6"), "product_id" : 1, "price" : "20.00", "discount" : "6", "start" : ISODate("2020-08-22T02:10:58.255Z"), "expiry" : ISODate("2020-09-16T02:10:58.255Z") }` | 
-| GET | '/PriceAndPromotion/multiple/:product_ids' | displays an array of price and promo records for array of product ids in URL | |
-| POST | '/PriceAndPromotion' | creates one price and promotion record for a product | |
+| GET | '/PriceAndPromotion/:product_id' | displays price and promotion based on product id in URL| `{"price": 20,"promotion": 6}` | 
+| GET | '/PriceAndPromotion/multiple/:product_ids' | displays an array of price and promotion records for array of product ids in URL | `[{"product_id": 5,"price":39,"promotion": 7},{"product_id": 6,"price": 15,"promotion": 4},{"product_id": 7,"price": 59,"promotion": 5}]`|
+| POST | '/PriceAndPromotion' | creates one record of price and promotional info  for a product | `{"product_id":200,"price":"20.00","discount":"6","start":"2020-08-22T02:10:58.255Z","expiry":"2020-09-16T02:10:58.255Z"}` |
 | PUT | '/PriceAndPromotion/:product_id' | edits a price and promotion record based on product id in URL | |
 | DELETE | '/PriceAndPromotion/:product_id' | deletes a price and promotion record based on product id in URL | |
 

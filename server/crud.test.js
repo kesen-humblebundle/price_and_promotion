@@ -65,7 +65,7 @@ describe("Crud Operations", function(){
         .post('/PriceAndPromotion')
         .send(priceAndPromosComplete)
         .end((err, res) => {
-          res.should.have.status(200);
+          res.should.have.status(201);
           res.text.should.equal('Post Successful');
           done();
         });

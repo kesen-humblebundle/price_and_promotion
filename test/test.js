@@ -1,3 +1,5 @@
+/** Commented Inherited Test due to bugs **/
+
 // const chai = require('chai');
 // const assert = require('assert');
 // const expect = require('chai').expect;

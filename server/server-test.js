@@ -1,3 +1,5 @@
+/** Commented Inherited Test due to bugs **/
+
 // import axios from 'axios';
 // import PriceAndPromo from '../database/index.js';
 // const db = require('../database/index.js');

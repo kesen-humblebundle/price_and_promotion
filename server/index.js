@@ -75,7 +75,7 @@ app.post('/PriceAndPromotion', (req, res) => {
   } else {
     PriceAndPromo.create(priceAndPromotionData)
     .then( () => {
-      res.status(200).send('Post Successful');
+      res.status(201).send('Post Successful');
     })
     .catch( (err) => {
       res.status(404).send(err);
