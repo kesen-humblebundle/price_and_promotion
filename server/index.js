@@ -68,7 +68,6 @@ app.get('/:product_id', (req, res) => {
 app.post('/PriceAndPromotion', (req, res) => {
 
   let priceAndPromotionData = req.body;
-  console.log(priceAndPromotionData);
 
   PriceAndPromo.create(priceAndPromotionData)
   .then( () => {

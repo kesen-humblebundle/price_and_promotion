@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import PriceAndPromoContainer from "./PriceAndPromoContainer.jsx";
 import PriceImage from "./PriceImage.jsx"
 import axios from 'axios';
+import samplePlatforms from '../sampleData/samplePlatforms.js';
+import sampleImage from '../sampleData/sampleImage.js';
 
 const AppStyledForPricePromo = styled.div`
   font-family: 'Lucida Grande', 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -88,36 +90,8 @@ class App extends React.Component {
       .then(ret => {
         data.price = ret.price;
         data.promotion = ret.promotion;
-
-        /* hardcode dependent services */
-        data.image = 'https://i.picsum.photos/id/1003/1181/1772.jpg?hmac=oN9fHMXiqe9Zq2RM6XT-RVZkojgPnECWwyEF1RvvTZk'
-        data.platforms =  {
-          "product_id": 45,
-          "platforms": [
-              [
-                  "https://res.cloudinary.com/overview/image/upload/t_icon/v1595370318/platformicons/OriginTransWhite_e0fbaw.png",
-                  "https://res.cloudinary.com/overview/image/upload/t_icon/v1595370318/platformicons/OriginTransMed_fmdgby.png",
-                  "https://res.cloudinary.com/overview/image/upload/t_icon/v1595370318/platformicons/OriginTransDark_anruok.png"
-              ]
-          ],
-          "os": [
-              [
-                  "https://res.cloudinary.com/overview/image/upload/t_icon/v1595370319/platformicons/WindowsTransWhite_jyl6ij.png",
-                  "https://res.cloudinary.com/overview/image/upload/t_icon/v1595370319/platformicons/WindowsTransMed_wyuamc.png",
-                  "https://res.cloudinary.com/overview/image/upload/t_icon/v1595370318/platformicons/WindowsTransDark_tsafuk.png"
-              ],
-              [
-                  "https://res.cloudinary.com/overview/image/upload/t_icon/v1595370318/platformicons/MacTransWhite_bdszac.png",
-                  "https://res.cloudinary.com/overview/image/upload/t_icon/v1595370318/platformicons/MacTransMed_zns8pf.png",
-                  "https://res.cloudinary.com/overview/image/upload/t_icon/v1595370318/platformicons/MacTransDark_czv6eo.png"
-              ],
-              [
-                  "https://res.cloudinary.com/overview/image/upload/t_icon/v1595370317/platformicons/LinuxTransWhite_twr4ue.png",
-                  "https://res.cloudinary.com/overview/image/upload/t_icon/v1595370317/platformicons/LinuxTransMed_pbn9i6.png",
-                  "https://res.cloudinary.com/overview/image/upload/t_icon/v1595370317/platformicons/LinuxTransDark_qwgcie.png"
-              ]
-          ]
-      };
+        data.image = sampleImage;
+        data.platforms =  samplePlatforms;
         this.setState(data);
       })
 
