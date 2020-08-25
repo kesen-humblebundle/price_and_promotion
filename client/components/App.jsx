@@ -39,7 +39,9 @@ class App extends React.Component {
 
   /* Inherited Code, Not Needed */
   fetchProductPlatform(productId) {
+
     const requestURL = `http://ec2-3-129-17-68.us-east-2.compute.amazonaws.com:3002/system_req/platforms/${productId}`
+    
     return axios.get(requestURL, { crossdomain: true })
       .then((response) => {
         let data = response.data;
@@ -54,6 +56,7 @@ class App extends React.Component {
 
     const deployedURL = `http://ec2-3-128-28-100.us-east-2.compute.amazonaws.com:3006/PriceAndPromotion/${productId}`;
     const localURL = `http://localhost:3006/PriceAndPromotion/${productId}`;
+
     return axios.get(localURL)
       .then((response) => {
         let data = response.data;
