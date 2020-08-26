@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import PriceAndPromoContainer from "./PriceAndPromoContainer.jsx";
 import PriceImage from "./PriceImage.jsx"
 import axios from 'axios';
+import samplePlatforms from '../sampleData/samplePlatforms.js';
+import sampleImage from '../sampleData/sampleImage.js';
 
 const AppStyledForPricePromo = styled.div`
   font-family: 'Lucida Grande', 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -20,6 +22,7 @@ class App extends React.Component {
     this.state = null;
   }
 
+  /* Inherited Code, Not Needed */
   fetchImage(productId) {
 
     const requestURL = `http://ec2-52-14-126-227.us-east-2.compute.amazonaws.com:3001/api/${productId}?type=cover`;
@@ -34,8 +37,11 @@ class App extends React.Component {
       });
   }
 
+  /* Inherited Code, Not Needed */
   fetchProductPlatform(productId) {
+
     const requestURL = `http://ec2-3-129-17-68.us-east-2.compute.amazonaws.com:3002/system_req/platforms/${productId}`
+    
     return axios.get(requestURL, { crossdomain: true })
       .then((response) => {
         let data = response.data;
@@ -48,7 +54,10 @@ class App extends React.Component {
 
   fetchProductPriceAndPromo(productId) {
 
-    return axios.get(`http://ec2-3-128-28-100.us-east-2.compute.amazonaws.com:3006/PriceAndPromotion/${productId}`)
+    const deployedURL = `http://ec2-3-128-28-100.us-east-2.compute.amazonaws.com:3006/PriceAndPromotion/${productId}`;
+    const localURL = `http://localhost:3006/PriceAndPromotion/${productId}`;
+
+    return axios.get(localURL)
       .then((response) => {
         let data = response.data;
         return data;
@@ -84,16 +93,22 @@ class App extends React.Component {
       .then(ret => {
         data.price = ret.price;
         data.promotion = ret.promotion;
+        data.image = sampleImage;
+        data.platforms =  samplePlatforms;
+        this.setState(data);
       })
-    return this.fetchImage(productId)
-      .then(image => {
-        data.image = image;
-        return this.fetchProductPlatform(productId)
-          .then(platforms => {
-            data.platforms = platforms;
-            this.setState(data);
-          })
-      })
+
+     /*     Inherited Code dependent on other services   */
+
+    // return this.fetchImage(productId)
+    //   .then(image => {
+    //     data.image = image;
+    //     return this.fetchProductPlatform(productId)
+    //       .then(platforms => {
+    //         data.platforms = platforms;
+    //         this.setState(data);
+    //       })
+    //   })
   }
 
   render() {

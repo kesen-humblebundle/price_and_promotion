@@ -4,7 +4,7 @@
   "description": "FEC UEDA Price and Promotion Service",
   "main": "index.js",
   "scripts": {
-    "test": "mocha ./test/test.js",
+    "test": "mocha ./server",
     "start:dev": "nodemon ./server/index.js",
     "start": "node ./server/index.js",
     "build": "webpack -p",
@@ -13,19 +13,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/KichiUeda/price_and_promotion.git"
+    "url": "git+https://github.com/kesen-humblebundle/price_and_promotion.git"
   },
-  "author": "LachelleF",
+  "author": "Krissy Do",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/KichiUeda/price_and_promotion/issues"
-  },
-  "homepage": "https://github.com/KichiUeda/price_and_promotion#readme",
   "dependencies": {
     "axios": "^0.19.2",
-    "babel-core": "^6.26.3",
-    "babel-loader": "^8.1.0",
-    "babel-preset-env": "^1.7.0",
     "body-parser": "^1.19.0",
     "chai-enzyme": "^1.0.0-beta.1",
     "cors": "^2.8.5",
@@ -42,18 +35,22 @@
     "styled-components": "^5.1.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.10.3",
+    "@babel/core": "^7.11.4",
     "@babel/node": "^7.10.3",
     "@babel/preset-env": "^7.10.3",
     "@babel/preset-react": "^7.10.1",
+    "@babel/register": "^7.10.5",
     "@shelf/jest-mongodb": "^1.1.5",
     "babel-jest": "^26.0.1",
+    "babel-loader": "^8.1.0",
     "babel-plugin-styled-components": "^1.11.1",
+    "babel-polyfill": "^6.26.0",
     "chai": "^4.2.0",
     "chai-enzyme": "^1.0.0-beta.1",
+    "chai-http": "^4.3.0",
     "html-webpack-plugin": "^4.3.0",
     "jest": "^26.1.0",
-    "mocha": "^8.0.1",
+    "mocha": "^8.1.1",
     "nodemon": "^2.0.4",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11"

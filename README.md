@@ -52,5 +52,15 @@ From within the root directory:
 npm install -g webpack
 npm install
 
+## API
+
+| HTTP Method | Route | Used For | Sample Data |
+| ---- | ---- | ---- | ---- |
+| GET | '/PriceAndPromotion/:product_id' | displays price and promotion based on product id in URL| `{"price": 20,"promotion": 6}` | 
+| GET | '/PriceAndPromotion/multiple/:product_ids' | displays an array of price and promotion records for array of product ids in URL | `[{"product_id": 5,"price":39,"promotion": 7},{"product_id": 6,"price": 15,"promotion": 4},{"product_id": 7,"price": 59,"promotion": 5}]`|
+| POST | '/PriceAndPromotion' | creates one record of price and promotional info  for a product | `{"product_id":200,"price":"20.00","discount":"6","start":"2020-08-22T02:10:58.255Z","expiry":"2020-09-16T02:10:58.255Z"}` |
+| PUT | '/PriceAndPromotion/:product_id' | edits a price and promotion record based on product id in URL | |
+| DELETE | '/PriceAndPromotion/:product_id' | deletes a price and promotion record based on product id in URL | |
+
 ## URL:
 https://127.0.0.1:3006
