@@ -4,7 +4,7 @@ const app = express();
 const PORT = process.env.PORT || 3006;
 const path = require('path');
 const bodyParser = require('body-parser');
-const PriceAndPromo = require('../database/index.js');
+const PriceAndPromo = require('../database-mongodb/index.js');
 const cors = require('cors');
 const { nextTick } = require('process');
 
@@ -19,7 +19,8 @@ app.get('/PriceAndPromotion/:product_id', (req, res) => {
   let id = req.params.product_id;
 
   PriceAndPromo.find({ product_id: id })
-    .then(game => {
+    .then(game => 
+      {
       if (!game) {
         res.status(400).send('No game to return');
       } else {
@@ -58,6 +59,8 @@ app.get('/PriceAndPromotion/multiple/:product_ids', (req, res) => {
     res.status(200).send(data);
   })
 });
+
+/**     Extend CRUD Operations      **/
 
 //based on product number from URL,returns an object that includes price, promotion/discount, start date, and expiry
 app.get('/:product_id', (req, res) => {
