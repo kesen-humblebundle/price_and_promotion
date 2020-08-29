@@ -1,3 +1,6 @@
+
+/*  migration file to load 5 table schemas (publishers, products, subscription_discounts, general_discounts, and publisher_discounts) */
+
 exports.up = async function(knex) {
 
   return knex.schema

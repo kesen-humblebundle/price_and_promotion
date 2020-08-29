@@ -8,3 +8,5 @@ const env = process.env.NODE.ENV || 'development';
 const configOptions = knexconfig[env];
 
 module.exports = knex(configOptions);
+
+
