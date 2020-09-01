@@ -27,7 +27,7 @@ let seed = function () {
   //json, stringify obj
   let jsonArray = JSON.stringify(gamesPriceAndPromos);
   //write array of games to file for gist requirement
-  fs.writeFileSync('./database/priceAndPromoSampleData.js', jsonArray);
+  fs.writeFileSync('./database-mongodb/priceAndPromoSampleData.js', jsonArray);
   //return array of games
   return gamesPriceAndPromos;
 }
