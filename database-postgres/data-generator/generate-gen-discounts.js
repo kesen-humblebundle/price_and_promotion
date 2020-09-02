@@ -1,7 +1,10 @@
 const faker = require('faker');
 const fs = require('fs');
 const moment = require('moment');
-const writeData = require('./writeToCSV.js');
+const {writeData} = require('../writeToCSV.js');
+
+// Include process module 
+const process = require('process'); 
 
 //TODO for Optimization
 //faker.fake for optimizaton
@@ -9,11 +12,20 @@ const writeData = require('./writeToCSV.js');
 //test csv by reading, test data types
 
 
+
 /* 
-*  Func creates 1 fake product record 
-*    @returns {{discount: Number, productId: Number, start: Date, end: Date}} one data record
+* @function generateGeneralDiscountsGenerates
+*
+* @typedef {object} Data
+* @property {number} discount - % off of product price
+* @property {number} productId
+* @property {date} - start date of promotion
+* @property {date} - end date of promotion
+*
+* @returns {Data} one fake data record
 */
 
+/** Generates 1 general discount record **/
 const generateGeneralDiscounts = () => {
 
   //create 14 day range promotional discount
@@ -36,9 +48,10 @@ const generateGeneralDiscounts = () => {
   return record;
 };
 
-module.exports = generateGeneralDiscounts;
+module.exports.generateGeneralDiscounts = generateGeneralDiscounts;
 
-writeData(1e7, generateGeneralDiscounts, 'gen_discounts');
+//write general discounts data to csv ran from command line
+process.argv[2] === '--generate' ? writeData(1e7, generateGeneralDiscounts, 'gen_discounts') : null;
 
 
 
