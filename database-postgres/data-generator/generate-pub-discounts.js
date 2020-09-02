@@ -3,9 +3,6 @@ const fs = require('fs');
 const moment = require('moment');
 const {writeData} = require('../writeToCSV.js');
 
-// Include process module 
-const process = require('process'); 
-
 /* 
 * @function generatePublisherDiscounts
 *

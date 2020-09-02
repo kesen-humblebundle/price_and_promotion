@@ -2,9 +2,6 @@ const faker = require('faker');
 const fs = require('fs');
 const {writeData} = require('../writeToCSV.js');
 
-// Include process module 
-const process = require('process'); 
-
 /* 
 * @function generateSubscriptionDiscounts
 *

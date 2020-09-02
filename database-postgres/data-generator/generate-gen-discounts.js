@@ -3,14 +3,10 @@ const fs = require('fs');
 const moment = require('moment');
 const {writeData} = require('../writeToCSV.js');
 
-// Include process module 
-const process = require('process'); 
-
 //TODO for Optimization
 //faker.fake for optimizaton
 //batches for ec2
 //test csv by reading, test data types
-
 
 
 /* 

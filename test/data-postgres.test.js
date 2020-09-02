@@ -19,9 +19,8 @@ describe('Generate Product Data', () => {
     
   });
 
-  it('should return an object', (done) => {
+  it('should return an object', () => {
     expect(record).to.be.an('object');
-    done();
   });
 
   it('should have 3 properties', (done) => {
