@@ -19,8 +19,6 @@ describe('Generate Product Data', () => {
     
   });
 
-  
-
   it('should return an object', (done) => {
     expect(record).to.be.an('object');
     done();
@@ -77,9 +75,7 @@ describe('CSV file for Products',  () => {
       expect(row.split(',')).to.have.lengthOf(3);
     })
   
-  });4
-
-
+  });
 
 });
 
