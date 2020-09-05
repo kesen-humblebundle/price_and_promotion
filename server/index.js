@@ -4,7 +4,7 @@ const app = express();
 const PORT = process.env.PORT || 3006;
 const path = require('path');
 const bodyParser = require('body-parser');
-const PriceAndPromo = require('../database-mongodb/index.js');
+const PriceAndPromo = require('../database/database-mongodb/index.js');
 const cors = require('cors');
 const { nextTick } = require('process');
 

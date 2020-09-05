@@ -15,12 +15,12 @@ const writeData = (records = 1e7, dataGeneratorFunc, fileName) => {
   (async () => {
     try {
       // let writer = csvWriter({sendHeaders: false});
-      let writer = csvWriter({sendHeaders: false});
-      writer.pipe(fs.createWriteStream(`./database-postgres/csv/${fileName}.csv`));
-      for (let i = 0; i < records; i++) {
+      let writer = csvWriter();
+      writer.pipe(fs.createWriteStream(`./database/csv/${fileName}.csv`));
+      for (let i = 1; i <= records; i++) {
         
         let data = dataGeneratorFunc(i);
-
+       
         //when writestream returns false because highWaterMark is reached, stream will need to be drained
         if (!writer.write(data)) {
           await new Promise( resolve => writer.once('drain', resolve));

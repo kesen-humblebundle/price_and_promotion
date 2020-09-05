@@ -13,7 +13,7 @@ exports.up = async function(knex) {
       tbl.string('game_name')
       tbl.float('base_price')
       tbl
-        .integer('publisherId')
+        .integer('publisher_id')
         .references('id')
         .inTable('publishers')
     })
@@ -21,29 +21,29 @@ exports.up = async function(knex) {
       tbl.increments('id')
       tbl.integer('discount')
       tbl
-        .integer('proudctId')
+        .integer('product_id')
         .references('id')
         .inTable('products')
     })
     .createTable("publisher_discounts", tbl => {
       tbl.increments('id')
       tbl.integer('discount')
-      tbl.date('start')
-      tbl.date('end')
       tbl
-        .integer('publisherId')
+        .integer('publisher_id')
         .references('id')
         .inTable('publishers')
+      tbl.date('start')
+      tbl.date('end')
     })
     .createTable("general_discounts", tbl => {
       tbl.increments('id')
       tbl.integer('discount')
-      tbl.date('start')
-      tbl.date('end')
       tbl
-      .integer('productId')
+      .integer('product_id')
       .references('id')
       .inTable('products')
+      tbl.date('start')
+      tbl.date('end')
     });
  
 };
@@ -51,10 +51,10 @@ exports.up = async function(knex) {
 exports.down = function(knex) {
 
   return knex.schema
-    .dropTableIfExists("publishers")
-    .dropTableIfExists("products")
-    .dropTableIfExists("subscription_discounts")
-    .dropTableIfExists("publisher_discounts")
-    .dropTableIfExists("general_discounts");
+  .dropTableIfExists("subscription_discounts")
+  .dropTableIfExists("publisher_discounts")
+  .dropTableIfExists("general_discounts")
+  .dropTableIfExists("products")
+  .dropTableIfExists("publishers");
 
 };
