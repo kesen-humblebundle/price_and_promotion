@@ -1,10 +1,7 @@
 const { nano } = require('./index.js');
-const csv = require('csv-parser');
-const fs = require('fs');
 require("dotenv").config();
 const { COUCHDB_URI } = process.env;
 const couchimport = require('couchimport');
-
 
 //TODO: refactor code to check db if exist before creates one
 
