@@ -30,6 +30,6 @@ const generateProducts = () => {
 module.exports.generateProducts = generateProducts;
 
 //write products data to csv if ran from command line
-process.argv[2] === '--generate' ? writeData(100, generateProducts, 'productstest') : null;
+process.argv[2] === '--generate' ? writeData(1e7, generateProducts, 'products') : null;
 
 

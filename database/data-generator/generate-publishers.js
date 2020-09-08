@@ -1,3 +1,4 @@
+  
 const faker = require('faker');
 const fs = require('fs');
 const {writeData} = require('../writeToCSV.js');

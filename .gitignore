@@ -2,3 +2,7 @@ node_modules
 public/bundle.js
 bundle.js
 *.csv
+.env
+*.sql
+views.js
+importData.js

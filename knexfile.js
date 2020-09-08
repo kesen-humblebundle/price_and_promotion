@@ -2,7 +2,7 @@
 
 //use .env
 require("dotenv").config();
-const { CLIENT, DATABASE, HOST, PG_PORT, PG_USER, PG_PASSWORD} = process.env;
+const { CLIENT, PGDATABASE, PGHOST, PGPORT, PGUSER, PGPASSWORD} = process.env;
 
 module.exports = {
   /*  config for development  */
@@ -10,11 +10,11 @@ module.exports = {
     client: CLIENT, //specify client, psql for this service
     //need to create user login/password and database in .env file, host is local ip, port is pg default
     connection: {
-      database: DATABASE, 
-      user: PG_USER,
-      password: PG_PASSWORD,
-      host: HOST,
-      port: PG_PORT
+      database: PGDATABASE, 
+      user: PGUSER,
+      password: PGPASSWORD,
+      host: PGHOST,
+      port: PGPORT
     },
     migrations: {
       directory: __dirname + "/database-postgres/migrations"
