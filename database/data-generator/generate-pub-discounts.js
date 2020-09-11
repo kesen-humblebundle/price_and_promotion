@@ -1,6 +1,7 @@
 const faker = require('faker');
 const fs = require('fs');
 const moment = require('moment');
+const {writeData} = require('../writeToCSV.js');
 
 /* 
 * @function generatePublisherDiscounts
