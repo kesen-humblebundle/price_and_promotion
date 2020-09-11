@@ -17,7 +17,7 @@ const {generateProductsForCouch} = require('../data-generator/generate-products-
     let docs = [];
 
     //pushes a document to array, for every 5000, it will do a bulk insert to db
-    for (let i = 1; i <= 1e4; i++) {
+    for (let i = 1; i <= 1e7; i++) {
 
       await docs.push(generateProductsForCouch(String(i)));
 

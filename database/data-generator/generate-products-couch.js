@@ -1,6 +1,5 @@
 const faker = require('faker');
-const {generateGeneralDiscounts} = require('./generate-gen-discounts-couch.js');
-const {generatePublisherDiscounts} = require('./generate-pub-discounts-couch.js');
+const {generateDiscounts} = require('./generate-discounts-couch.js');
 
 
 /* 
@@ -30,11 +29,11 @@ const generateProductsForCouch = (id) => {
   let publisherDiscounts = [];
 
   for (let i = 0; i < Math.floor(Math.random() * 10); i++) {
-    generalDiscounts.push(generateGeneralDiscounts());
+    generalDiscounts.push(generateDiscounts());
   }
 
   for (let i = 0; i < Math.floor(Math.random() * 10); i++) {
-    publisherDiscounts.push(generatePublisherDiscounts());
+    publisherDiscounts.push(generateDiscounts());
   }
 
   let record = {
