@@ -7,9 +7,7 @@ const fs = require('fs').promises;
 
 const { generateProducts } = require('../database/data-generator/generate-products.js');
 const { writeData } = require('../database/writeToCSV.js');
-const db = require('./db-test.js');
-const createTables = require('./db-setup.js');
-
+// const createTables = require('./db-setup.js');
 
 describe('Generate Product Data', () => {
 
@@ -82,6 +80,7 @@ describe('CSV file for Products',  () => {
 });
 
 
+//TODO: write tests for actual database 
 // describe('Database',  () => {
 
 //   before( async () => {
