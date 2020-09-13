@@ -135,7 +135,7 @@ app.put('/PriceAndPromotion', (req, res) => {
     })
     .catch( (err) => {
       console.log(err);
-      res.status(400).send({'Update Unsuccessful': err});
+      res.status(400).send({'Update Unsuccessful': JSON.stringify(err)});
     } )
 
 });
@@ -146,8 +146,8 @@ app.delete('/PriceAndPromotion/:product_id', (req, res) => {
   let id = req.params.product_id;
 
   deleteProductandDiscounts(id)
-  .then( (response) => {
-    res.status(200).send('Delete Successful');
+  .then( (id) => {
+    res.status(200).send(`Deleted Product Id ${id} Successfully`);
   })
   .catch( (err) => {
     res.status(400).send({error: JSON.stringify(err)});
