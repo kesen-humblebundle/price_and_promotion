@@ -25,3 +25,19 @@ PriceAndPromo.deleteOne({ product_id: id })
 .catch( err => {
   res.status(404).send(err);
 });
+
+
+//edits a record based on product id
+app.put('/PriceAndPromotion/:product_id', (req, res) => {
+
+  let id = req.params.product_id;
+  let newData = req.body;
+
+  return PriceAndPromo.updateOne({ product_id: id }, newData)
+  .then( () => {
+    res.status(200).send('Update Successful');
+  })
+  .catch((err) => {
+    res.status(404).send(err);
+  })
+});

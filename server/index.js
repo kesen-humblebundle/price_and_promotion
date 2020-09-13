@@ -7,10 +7,12 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 // const { nextTick } = require('process');
 // const { get } = require('http');
+// const { ESRCH } = require('constants');
 
 const getPriceAndPromotion = require('../database/database-postgres/query-functions/getPriceandPromotions.js');
-const deleteProductandDiscounts = require('../database/database-postgres/query-functions/deleteProductandDiscounts');
-const { ESRCH } = require('constants');
+const deleteProductandDiscounts = require('../database/database-postgres/query-functions/deleteProductandDiscounts.js');
+const updateRecords = require('../database/database-postgres/query-functions/updateRecords.js');
+
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -122,19 +124,20 @@ app.post('/PriceAndPromotion', (req, res) => {
   }
 });
 
-//edits a record based on product id
-app.put('/PriceAndPromotion/:product_id', (req, res) => {
+//updates a record based on product id
+app.put('/PriceAndPromotion', (req, res) => {
 
-  let id = req.params.product_id;
-  let newData = req.body;
+  let data = req.body;
 
-  return PriceAndPromo.updateOne({ product_id: id }, newData)
-  .then( () => {
-    res.status(200).send('Update Successful');
-  })
-  .catch((err) => {
-    res.status(404).send(err);
-  })
+  updateRecords(data)
+    .then( (id) => {
+      res.status(200).send(`Updated Product Id ${id[0]} Successfully`);
+    })
+    .catch( (err) => {
+      console.log(err);
+      res.status(400).send({'Update Unsuccessful': err});
+    } )
+
 });
 
 //deletes a record based on product id
