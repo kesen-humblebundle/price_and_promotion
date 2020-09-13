@@ -18,14 +18,25 @@ app.use(cors());
 app.get('/PriceAndPromotion/:product_id', (req, res) => {
 
   let id = Number(req.params.product_id);
-  console.log(id);
+
+  if(id.isNaN()){
+    res.status(400).send('Not a Product Id');
+  }
+
   getPriceAndPromotion(id)
   .then( (response) => {
-
-    console.log(response);
-    res.send(response);
+    let {base_price, discount, max} = response[0];
+    let price = base_price;
+    let promotion = discount;
+    //check for general or publisher discount to get new base price;
+    if(max) {
+      price *= (1 - base_price/100)
+      price = Number(price.toFixed(2));
+    }
+    res.status(200).send({price, promotion});
   })
   .catch( (err) => {
+    res.status(404).send('Data Not Found');
     console.log(err);
   })
 
