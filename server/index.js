@@ -6,6 +6,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 // const { nextTick } = require('process');
+// const { get } = require('http');
 
 const getPriceAndPromotion = require('../database/database-postgres/query-functions/getPriceandPromotions.js');
 
@@ -14,65 +15,92 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
 
+//TODO: Refactor to have routes, models, and middelware to handle errors
+
 //returns an object that includes price, promotion/discount
 app.get('/PriceAndPromotion/:product_id', (req, res) => {
 
-  let id = Number(req.params.product_id);
+  if(!req.params.product_id) {
+    res.status(400).send('No Product Id');
+  } else if (req.params.product_id) {
+    let id = [Number(req.params.product_id)];
+  } else if(isNaN(id[0])){
+    res.status(400).send('Invalid Product Id');
+  } else {
 
-  if(id.isNaN()){
-    res.status(400).send('Not a Product Id');
+    getPriceAndPromotion(id)
+      .then( (response) => {
+        console.log(response);
+        let {base_price, discount, max} = response[0];
+        let price = base_price;
+        let promotion = base_price * (discount/100);
+        promotion = Number(promotion.toFixed(2));
+        //check for general or publisher discount to get new base price;
+        if(max) {
+          price *= (1 - max/100)
+          price = Number(price.toFixed(2));
+        }
+        res.status(200).send({price, promotion});
+      })
+      .catch( (err) => {
+        res.status(404).send('Data Not Found');
+        console.log(err);
+      })
   }
-
-  getPriceAndPromotion(id)
-  .then( (response) => {
-    let {base_price, discount, max} = response[0];
-    let price = base_price;
-    let promotion = discount;
-    //check for general or publisher discount to get new base price;
-    if(max) {
-      price *= (1 - base_price/100)
-      price = Number(price.toFixed(2));
-    }
-    res.status(200).send({price, promotion});
-  })
-  .catch( (err) => {
-    res.status(404).send('Data Not Found');
-    console.log(err);
-  })
-
 });
 
 //returns price and promos for an array of product ids
-app.get('/PriceAndPromotion/multiple/:product_ids', (req, res) => {
-  let arrayOfIds = JSON.parse(req.params.product_ids);
-  let dataBundle = async () => {
-    let priceAndPromosArray = []
-    for (let i = 0; i < arrayOfIds.length; i++) {
-      await PriceAndPromo.find({ product_id: arrayOfIds[i] })
-        .then((doc) => {
-          let data = {
-            product_id: doc[0].product_id,
-            price: doc[0].price,
-            promotion: doc[0].discount
-          }
-          priceAndPromosArray.push(data);
-        })
-        .catch(err => console.log(err))
+app.get('/PriceAndPromotion/multiple/:product_ids', async (req, res) => {
+
+  try {
+    if(!req.params.product_ids){
+      res.status(400).send('No Product Id');
+    } else if (req.params.product_ids) {
+      let arrayOfIds = req.params.product_ids;
+      await arrayOfIds.map( (id) => {
+        if(isNaN(id) || id <= 0){
+          res.status(400).send('Invalid Product Id');
+        }
+      });
+    } else {
+    
+      let arrayOfRecords = await getPriceAndPromotion(arrayOfIds);
+
+      let arrayOfPriceandPromtions = await arrayOfRecords.map( record => {
+
+        let {id, base_price, discount, max} = record;
+        let product_id = id;
+        let price = base_price;
+        let promotion = base_price * (discount/100);
+        promotion = Number(promotion.toFixed(2));
+        
+        if(max) {
+          price *= (1 - max/100)
+          price = Number(price.toFixed(2));
+        }
+
+        return {product_id, price, promotion};
+
+      });
+    
+      res.status(200).send(arrayOfPriceandPromtions);
     }
-    return priceAndPromosArray;
+    
+  } catch (err) {
+    res.status(404).send('Data Not Found');
+    console.log(err);
   }
-  Promise.resolve(dataBundle()).then((data) => {
-    res.status(200).send(data);
-  })
+
 });
 
-/**     Extend CRUD Operations      **/
+
 
 //based on product number from URL,returns an object that includes price, promotion/discount, start date, and expiry
 app.get('/:product_id', (req, res) => {
   res.sendFile(path.resolve('public/index.html'));
 });
 
+/**     Extend CRUD Operations      **/
 //creates a new product
 app.post('/PriceAndPromotion', (req, res) => {
 
