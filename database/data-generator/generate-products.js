@@ -20,7 +20,7 @@ const generateProducts = () => {
   let record = {
     name: faker.lorem.words(),
     base_price: parseFloat(faker.random.number({min:5, max: 100, precision: .01}).toFixed(2)),
-    publisherId: faker.random.number({min: 1, max: 5e6}) //1-5M publisherId's
+    publisher_id: faker.random.number({min: 1, max: 5e6}) //1-5M publisherId's
   };
 
   return record;

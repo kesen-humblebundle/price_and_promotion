@@ -10,7 +10,7 @@ exports.up = async function(knex) {
     })
     .createTable("products", tbl => {
       tbl.increments('id')
-      tbl.string('game_name')
+      tbl.string('name')
       tbl.float('base_price')
       tbl
         .integer('publisher_id')

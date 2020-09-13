@@ -1,6 +1,5 @@
   
 const faker = require('faker');
-const fs = require('fs');
 const {writeData} = require('../writeToCSV.js');
 
 /* 
@@ -17,7 +16,7 @@ const {writeData} = require('../writeToCSV.js');
 const generatePublishers = () => {
  
   //one row of data
-  let record = {publisher: faker.lorem.words()};
+  let record = {name: faker.lorem.words()};
   return record;
 };
 

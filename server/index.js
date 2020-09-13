@@ -4,9 +4,10 @@ const app = express();
 const PORT = process.env.PORT || 3006;
 const path = require('path');
 const bodyParser = require('body-parser');
-const PriceAndPromo = require('../database/database-mongodb/index.js');
 const cors = require('cors');
-const { nextTick } = require('process');
+// const { nextTick } = require('process');
+
+const getPriceAndPromotion = require('../database/database-postgres/query-functions/getPriceandPromotions.js');
 
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -16,24 +17,18 @@ app.use(cors());
 //returns an object that includes price, promotion/discount
 app.get('/PriceAndPromotion/:product_id', (req, res) => {
 
-  let id = req.params.product_id;
+  let id = Number(req.params.product_id);
+  console.log(id);
+  getPriceAndPromotion(id)
+  .then( (response) => {
 
-  PriceAndPromo.find({ product_id: id })
-    .then(game => 
-      {
-      if (!game) {
-        res.status(400).send('No game to return');
-      } else {
-        let data = {
-          price: game[0].price,
-          promotion: game[0].discount,
-        }
-        res.status(200).send(data);
-      }
-    })
-    .catch(err => {
-      res.status(404).send(err);
-    });
+    console.log(response);
+    res.send(response);
+  })
+  .catch( (err) => {
+    console.log(err);
+  })
+
 });
 
 //returns price and promos for an array of product ids

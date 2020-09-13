@@ -17,10 +17,10 @@ module.exports = {
       port: PGPORT
     },
     migrations: {
-      directory: __dirname + "/database-postgres/migrations"
+      directory: __dirname + "/database/database-postgres/migrations"
     },
     seeds: {
-      directory: __dirname + "/database-postgres/seeds"
+      directory: __dirname + "/database/database-postgres/seeds"
     }
   }
 };
