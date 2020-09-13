@@ -9,7 +9,8 @@ const cors = require('cors');
 // const { get } = require('http');
 
 const getPriceAndPromotion = require('../database/database-postgres/query-functions/getPriceandPromotions.js');
-
+const deleteProductandDiscounts = require('../database/database-postgres/query-functions/deleteProductandDiscounts');
+const { ESRCH } = require('constants');
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -105,6 +106,7 @@ app.get('/:product_id', (req, res) => {
 app.post('/PriceAndPromotion', (req, res) => {
 
   let priceAndPromotionData = req.body;
+  console.log(priceAndPromotionData);
 
   //needs to have all fields to post record
   if(!priceAndPromotionData.product_id || !priceAndPromotionData.price || !priceAndPromotionData.start || !priceAndPromotionData.expiry) {
@@ -140,14 +142,13 @@ app.delete('/PriceAndPromotion/:product_id', (req, res) => {
 
   let id = req.params.product_id;
 
-  PriceAndPromo.deleteOne({ product_id: id })
-  .then( () => {
+  deleteProductandDiscounts(id)
+  .then( (response) => {
     res.status(200).send('Delete Successful');
   })
-  .catch( err => {
-    res.status(404).send(err);
-  });
-
+  .catch( (err) => {
+    res.status(400).send({error: JSON.stringify(err)});
+  })
 });
 
 module.exports = app.listen(PORT, (error) => {
