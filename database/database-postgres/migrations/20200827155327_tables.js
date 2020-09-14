@@ -6,44 +6,48 @@ exports.up = async function(knex) {
   return knex.schema
     .createTable("publishers", tbl => {
       tbl.increments('id')
-      tbl.string('name')
+      tbl.string('name').notNullable();
     })
     .createTable("products", tbl => {
       tbl.increments('id')
-      tbl.string('name')
-      tbl.float('base_price')
+      tbl.string('name').notNullable();
+      tbl.float('base_price').notNullable();
       tbl
         .integer('publisher_id')
         .references('id')
         .inTable('publishers')
+        .notNullable();
     })
     .createTable("subscription_discounts", tbl => {
-      tbl.increments('id')
-      tbl.integer('discount')
+      tbl.increments('id').notNullable();
+      tbl.integer('discount').notNullable();
       tbl
         .integer('product_id')
         .references('id')
         .inTable('products')
+        .notNullable();
     })
     .createTable("publisher_discounts", tbl => {
       tbl.increments('id')
-      tbl.integer('discount')
+      tbl.integer('discount').notNullable();
       tbl
         .integer('publisher_id')
         .references('id')
         .inTable('publishers')
-      tbl.date('start')
-      tbl.date('end')
+        .notNullable();
+      tbl.date('start').notNullable();
+      tbl.date('end').notNullable();
     })
     .createTable("general_discounts", tbl => {
       tbl.increments('id')
-      tbl.integer('discount')
+      tbl.integer('discount').notNullable();
       tbl
       .integer('product_id')
       .references('id')
       .inTable('products')
-      tbl.date('start')
-      tbl.date('end')
+      .notNullable();
+      tbl.date('start').notNullable();
+      tbl.date('end').notNullable();
     });
  
 };

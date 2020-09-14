@@ -41,3 +41,23 @@ app.put('/PriceAndPromotion/:product_id', (req, res) => {
     res.status(404).send(err);
   })
 });
+
+//creates document
+app.post('/PriceAndPromotion', (req, res) => {
+
+  let priceAndPromotionData = req.body;
+  console.log(priceAndPromotionData);
+
+  //needs to have all fields to post record
+  if(!priceAndPromotionData.product_id || !priceAndPromotionData.price || !priceAndPromotionData.start || !priceAndPromotionData.expiry) {
+    res.status(400).send('Missing Field(s)');
+  } else {
+    PriceAndPromo.create(priceAndPromotionData)
+    .then( () => {
+      res.status(201).send('Post Successful');
+    })
+    .catch( (err) => {
+      res.status(404).send(err);
+    });
+  }
+});

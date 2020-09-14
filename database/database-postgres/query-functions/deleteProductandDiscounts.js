@@ -2,6 +2,8 @@ const db = require('../db.js');
 
 /**
  * @param {String} product id
+ * 
+ * @returns {Number} number of records deleted
 **/
 
 module.exports = async (id) => {

@@ -12,6 +12,8 @@ const cors = require('cors');
 const getPriceAndPromotion = require('../database/database-postgres/query-functions/getPriceandPromotions.js');
 const deleteProductandDiscounts = require('../database/database-postgres/query-functions/deleteProductandDiscounts.js');
 const updateRecords = require('../database/database-postgres/query-functions/updateRecords.js');
+const insertRecords = require('../database/database-postgres/query-functions/insertRecords.js');
+const { EDESTADDRREQ } = require('constants');
 
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -22,27 +24,27 @@ app.use(cors());
 
 //returns an object that includes price, promotion/discount
 app.get('/PriceAndPromotion/:product_id', (req, res) => {
-
-  if(!req.params.product_id) {
-    res.status(400).send('No Product Id');
-  } else if (req.params.product_id) {
-    let id = [Number(req.params.product_id)];
-  } else if(isNaN(id[0])){
+ 
+  let id = (req.params.product_id);
+  if(isNaN(id)){
     res.status(400).send('Invalid Product Id');
   } else {
-
+    id = [Number(req.params.product_id)];
+   
     getPriceAndPromotion(id)
       .then( (response) => {
-        console.log(response);
+       
         let {base_price, discount, max} = response[0];
         let price = base_price;
         let promotion = base_price * (discount/100);
         promotion = Number(promotion.toFixed(2));
-        //check for general or publisher discount to get new base price;
+
+        //check for general or publisher discount to calculate new price for UI;
         if(max) {
           price *= (1 - max/100)
           price = Number(price.toFixed(2));
         }
+
         res.status(200).send({price, promotion});
       })
       .catch( (err) => {
@@ -59,14 +61,9 @@ app.get('/PriceAndPromotion/multiple/:product_ids', async (req, res) => {
     if(!req.params.product_ids){
       res.status(400).send('No Product Id');
     } else if (req.params.product_ids) {
-      let arrayOfIds = req.params.product_ids;
-      await arrayOfIds.map( (id) => {
-        if(isNaN(id) || id <= 0){
-          res.status(400).send('Invalid Product Id');
-        }
-      });
-    } else {
-    
+      
+      let arrayOfIds = JSON.parse(req.params.product_ids);
+          
       let arrayOfRecords = await getPriceAndPromotion(arrayOfIds);
 
       let arrayOfPriceandPromtions = await arrayOfRecords.map( record => {
@@ -104,24 +101,15 @@ app.get('/:product_id', (req, res) => {
 });
 
 /**     Extend CRUD Operations      **/
-//creates a new product
+
+//inserts one record
 app.post('/PriceAndPromotion', (req, res) => {
 
-  let priceAndPromotionData = req.body;
-  console.log(priceAndPromotionData);
+  let data = req.body;
 
-  //needs to have all fields to post record
-  if(!priceAndPromotionData.product_id || !priceAndPromotionData.price || !priceAndPromotionData.start || !priceAndPromotionData.expiry) {
-    res.status(400).send('Missing Field(s)');
-  } else {
-    PriceAndPromo.create(priceAndPromotionData)
-    .then( () => {
-      res.status(201).send('Post Successful');
-    })
-    .catch( (err) => {
-      res.status(404).send(err);
-    });
-  }
+  insertRecords(data)
+    .then( (response) => res.status(201).send({"NumberOfInsertedRecords": response.length, "ProductIds": response}))
+    .catch( (err) => res.status(400).send({error: JSON.stringify(err)}));
 });
 
 //updates a record based on product id
@@ -146,8 +134,13 @@ app.delete('/PriceAndPromotion/:product_id', (req, res) => {
   let id = req.params.product_id;
 
   deleteProductandDiscounts(id)
-  .then( (id) => {
-    res.status(200).send(`Deleted Product Id ${id} Successfully`);
+  .then( (response) => {
+    
+    if(response === 0) {
+      res.status(400).send('Record is not found');
+    } else {
+      res.status(200).send(`Deleted Product Id ${id} Successfully`);
+    }
   })
   .catch( (err) => {
     res.status(400).send({error: JSON.stringify(err)});

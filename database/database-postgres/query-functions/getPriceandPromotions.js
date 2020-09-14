@@ -12,7 +12,7 @@ module.exports = async (ids) => {
 
   let today = new Date();
   let date = moment(today).format('YYYY-MM-DD');
- 
+   
   return await db
     .select(db.raw('subd.id, subd.base_price, subd.discount, MAX(pgd.discount)'))
     .from(

@@ -4,7 +4,6 @@ const should = chai.should();
 const { expect } = require("chai");
 const fs = require('fs').promises;
 
-
 const { generateProducts } = require('../database/data-generator/generate-products.js');
 const { writeData } = require('../database/writeToCSV.js');
 // const createTables = require('./db-setup.js');
@@ -27,14 +26,14 @@ describe('Generate Product Data', () => {
   it('should have 3 properties', (done) => {
     expect(record).to.have.property('name');
     expect(record).to.have.property('base_price');
-    expect(record).to.have.property('publisherId');
+    expect(record).to.have.property('publisher_id');
     done();
   });
 
   it('all properties are the correct data type', (done) => {
     expect(record.name).to.be.a('string');
     expect(record.base_price).to.be.a('number');
-    expect(record.publisherId).to.be.a('number');
+    expect(record.publisher_id).to.be.a('number');
     done();
   });
   
@@ -44,11 +43,6 @@ describe('Generate Product Data', () => {
     done();
   });
 
-  it('publisher id is between 1 and 5M',  (done) => {
-    expect(record.publisherId).to.be.above(1);
-    expect(record.publisherId).to.be.below(5e6);
-    done();
-  });
 });
 
 describe('CSV file for Products',  () => {
