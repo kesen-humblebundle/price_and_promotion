@@ -1,5 +1,4 @@
 const faker = require('faker');
-const fs = require('fs');
 const moment = require('moment');
 const {writeData} = require('../writeToCSV.js');
 
@@ -30,7 +29,7 @@ const generatePublisherDiscounts = () => {
   //a row of data
   let record = {
     discount:  faker.random.number({min: 5, max: 95}),
-    publisherId:  faker.random.number({min: 1, max: 5e6}), //1-5M publisherId's,
+    publisher_id:  faker.random.number({min: 1, max: 5e6}), //1-5M publisherId's,
     start: start,
     end: end
   };

@@ -1,9 +1,7 @@
-const copyFrom = require('pg-copy-streams').from
-const fs = require('fs');
-
-const inputFile = '/Users/krissy/Documents/Codes/rpt21-SDC/price_and_promotion/database-postgres/csv/products.csv';
+const path = require('path');
+const inputFile = path.join(process.cwd(), '/database/csv/products.csv');
 const table = 'products';
-const headers = 'game_name,base_price,publisher_id';
+const headers = '"name",base_price,publisher_id';
 
 exports.seed = async (knex) => {
   // Deletes ALL existing entries
@@ -13,6 +11,6 @@ exports.seed = async (knex) => {
   await knex.raw(`ALTER SEQUENCE ${table}_id_seq RESTART WITH 1;`);
   
   // Inserts seed entries
-  await knex.raw(`COPY ${table} (${headers}) FROM '${inputFile}' WITH (FORMAT CSV, DELIMITER ',');`);
+  await knex.raw(`COPY ${table} (${headers}) FROM '${inputFile}' DELIMITER ',' CSV HEADER;`);
 
 };

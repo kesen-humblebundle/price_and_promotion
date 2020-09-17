@@ -5,6 +5,7 @@ let chaiHttp = require("chai-http");
 let server = require("../server/index.js");
 let should = chai.should();
 chai.use(chaiHttp);
+const insertRecords = require('../database/database-postgres/query-functions/insertRecords.js');
 
 describe("Crud Operations", function(){
 
@@ -36,62 +37,105 @@ describe("Crud Operations", function(){
   })
 
   describe('/POST', () => {
-    it('it should not POST a book without a product_id field', (done) => {
+    it('it should not POST a discount without a product_id field', (done) => {
       let priceAndPromosMissingField = {
-        "price":"30.00",
-        "discount":"6",
-        "start":"2020-08-22T02:10:58.255Z",
-        "expiry":"2020-09-16T02:10:58.255Z"
+        "table": "general_discounts",
+        "insert":{
+          "discount":"6",
+          "start":"2020-10-11",
+          "end":"2020-10-25"
+        }
       };
       chai.request(server)
         .post('/PriceAndPromotion')
         .send(priceAndPromosMissingField)
         .end((err, res) => {
           res.should.have.status(400);
-          res.text.should.equal('Missing Field(s)');
           done();
         });
     });
   
-    it('it should POST a book with all fields completed', (done) => {
+    it('it should not POST a discount with an invalid product id', (done) => {
       let priceAndPromosComplete = {
-        "product_id":200,
-        "price":"30.00",
-        "discount":"6",
-        "start":"2020-08-22T02:10:58.255Z",
-        "expiry":"2020-09-16T02:10:58.255Z"
+        "table": "general_discounts",
+        "insert":{
+          "product_id": "5000000000",
+          "discount":"6",
+          "start":"2020-10-11",
+          "end":"2020-10-25"
+        }
+      };
+      chai.request(server)
+        .post('/PriceAndPromotion')
+        .send(priceAndPromosComplete)
+        .end((err, res) => {
+          res.should.have.status(400);
+          res.body.should.be.a('object');
+          res.body.should.have.property('error');
+          done();
+        });
+    });
+
+    it('it should POST a discount with all fields completed', (done) => {
+      let priceAndPromosComplete = {
+        "table": "general_discounts",
+        "insert":{
+          "product_id": "500000",
+          "discount":"6",
+          "start":"2020-10-11",
+          "end":"2020-10-25"
+        }
       };
       chai.request(server)
         .post('/PriceAndPromotion')
         .send(priceAndPromosComplete)
         .end((err, res) => {
           res.should.have.status(201);
-          res.text.should.equal('Post Successful');
+          res.body.should.be.a('object');
+          res.body.should.have.property('NumberOfInsertedRecords');
+          res.body.should.have.property('ProductIds');
           done();
         });
     });
   });
 
   describe('/PUT/:product_id', () => {
+    let body = {
+      "id": "1",
+      "table": "products",
+      "update":{
+        "base_price": "45"
+      }
+    };
     it('it should UPDATE the price given the id and new price', (done) => {
       chai.request(server)
-      .put('/PriceAndPromotion/200')
-      .send({"price": "9.00"})
+      .put('/PriceAndPromotion')
+      .send(body)
       .end((err, res) => {
-            res.should.have.status(200);
-            res.text.should.eql('Update Successful');
+        res.should.have.status(200);
+        res.text.should.eql('Updated Product Id 1 Successfully');
         done();
       });
     });
   });
 
   describe('/DELETE/:product_id', () => {
+    let insertedId;
+    insertRecords({
+      "table": "products",
+      "insert": {
+        "name": "test",
+        "base_price": "45",
+        "publisher_id": "1"
+      }
+    })
+    .then( id => insertedId = id[0].id);
     it('it should delete price and promo record given the id', (done) => {
       chai.request(server)
-      .delete('/PriceAndPromotion/200')
+      .delete(`/PriceAndPromotion/${insertedId}`)
       .end((err, res) => {
-            res.should.have.status(200);
-            res.text.should.eql('Delete Successful');
+        res.should.have.status(200);
+        res.text.should.eql(`Deleted Product Id ${insertedId} Successfully`);
         done();
       });
     });

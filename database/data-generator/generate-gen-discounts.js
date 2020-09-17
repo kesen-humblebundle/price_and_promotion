@@ -3,11 +3,6 @@ const fs = require('fs');
 const moment = require('moment');
 const {writeData} = require('../writeToCSV.js');
 
-//TODO for Optimization
-//faker.fake for optimizaton
-//batches for ec2
-//test csv by reading, test data types
-
 
 /* 
 * @function generateGeneralDiscountsGenerates
@@ -36,7 +31,7 @@ const generateGeneralDiscounts = () => {
   //one row of data
   let record = {
     discount: faker.random.number({min: 5, max: 95}),
-    productId: faker.random.number({min: 1, max: 1e7}), //1-10M productId's
+    product_id: faker.random.number({min: 1, max: 1e7}), //1-10M productId's
     start: start,
     end: end
   };

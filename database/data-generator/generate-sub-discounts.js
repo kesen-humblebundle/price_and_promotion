@@ -1,5 +1,4 @@
 const faker = require('faker');
-const fs = require('fs');
 const {writeData} = require('../writeToCSV.js');
 
 /* 
@@ -20,7 +19,7 @@ const generateSubscriptionDiscounts = (id) => {
   //one row of data
   let record = {
     discount: faker.random.number({min: 10, max: 20}),
-    productId: id, //1-10M productId's
+    product_id: id, //1-10M productId's
   };
 
   return record;
