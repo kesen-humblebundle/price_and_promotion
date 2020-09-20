@@ -1,23 +1,19 @@
+const newrelic = require('newrelic');
 require('dotenv').config(); //loading environment lets
 const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 3006;
 const path = require('path');
-const bodyParser = require('body-parser');
 const cors = require('cors');
-// const { nextTick } = require('process');
-// const { get } = require('http');
-// const { ESRCH } = require('constants');
 
 const getPriceAndPromotion = require('../database/database-postgres/query-functions/getPriceandPromotions.js');
 const deleteProductandDiscounts = require('../database/database-postgres/query-functions/deleteProductandDiscounts.js');
 const updateRecords = require('../database/database-postgres/query-functions/updateRecords.js');
 const insertRecords = require('../database/database-postgres/query-functions/insertRecords.js');
-const { EDESTADDRREQ } = require('constants');
 
 app.use(express.static('public'));
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(cors());
 
 //TODO: Refactor to have routes, models, and middelware to handle errors

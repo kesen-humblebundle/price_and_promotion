@@ -1,0 +1,10 @@
+{
+  "simulation": "priceAndPromotion.PostReqSimulation",
+  "simulationId": "postReqSimulation500",
+  "start": 1600574994977,
+  "description": "",
+  "scenarios": ["Post Products"],
+  "assertions": [
+
+  ]
+}
