@@ -37,7 +37,7 @@ class GetReqStressSimulation extends Simulation {
   setUp(
     getGamePriceScenario.inject(
       nothingFor(5 seconds),
-      atOnceUsers(2000),
+      atOnceUsers(900),
       rampUsers(100) over(10 seconds)
       )
     )

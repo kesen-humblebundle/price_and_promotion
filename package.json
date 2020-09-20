@@ -52,6 +52,7 @@
     "pg": "^8.3.3",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "redis": "^3.0.2",
     "resolve-cwd": "^3.0.0",
     "styled-components": "^5.1.1"
   },
