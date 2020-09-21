@@ -1,23 +1,32 @@
-require('dotenv').config(); //loading environment lets
+const newrelic = require('newrelic');
+require('dotenv').config(); //loading environment 
 const express = require('express');
+const redis = require("redis");
+const { promisify } = require("util");
 const app = express();
+
+const port_redis = process.env.PORT || 6379;
 const PORT = process.env.PORT || 3006;
+
+//configure redis client on port 6379
+const redis_client = redis.createClient();
+const getAsync = promisify(redis_client.get).bind(redis_client);
+
+redis_client.on('connect', () => console.log('Redis Client Connected'));
+redis_client.on('error', (err) => console.log('Something went wrong ' + err));
+redis_client.unref();
+
 const path = require('path');
-const bodyParser = require('body-parser');
 const cors = require('cors');
-// const { nextTick } = require('process');
-// const { get } = require('http');
-// const { ESRCH } = require('constants');
 
 const getPriceAndPromotion = require('../database/database-postgres/query-functions/getPriceandPromotions.js');
 const deleteProductandDiscounts = require('../database/database-postgres/query-functions/deleteProductandDiscounts.js');
 const updateRecords = require('../database/database-postgres/query-functions/updateRecords.js');
 const insertRecords = require('../database/database-postgres/query-functions/insertRecords.js');
-const { EDESTADDRREQ } = require('constants');
 
 app.use(express.static('public'));
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 app.use(cors());
 
 //TODO: Refactor to have routes, models, and middelware to handle errors
@@ -29,28 +38,47 @@ app.get('/PriceAndPromotion/:product_id', (req, res) => {
   if(isNaN(id)){
     res.status(400).send('Invalid Product Id');
   } else {
-    id = [Number(req.params.product_id)];
-   
-    getPriceAndPromotion(id)
-      .then( (response) => {
-       
-        let {base_price, discount, max} = response[0];
-        let price = base_price;
-        let promotion = base_price * (discount/100);
-        promotion = Number(promotion.toFixed(2));
+ 
+    getAsync(String(id))
+      .then( (data) => {
+        
+        if (data) {
+          
+          res.status(200).send(data);
 
-        //check for general or publisher discount to calculate new price for UI;
-        if(max) {
-          price *= (1 - max/100)
-          price = Number(price.toFixed(2));
+        } else {
+
+          id = [Number(req.params.product_id)];
+          
+          getPriceAndPromotion(id)
+            .then( (response) => {
+              
+              let {id, base_price, discount, max} = response[0];
+              let price = base_price;
+              let promotion = base_price * (discount/100);
+              promotion = Number(promotion.toFixed(2));
+      
+              //check for general or publisher discount to calculate new price for UI;
+              if(max) {
+                price *= (1 - max/100)
+                price = Number(price.toFixed(2));
+              }
+                
+              //add data to Redis
+              redis_client.set(String(id), JSON.stringify({price, promotion}), redis.print/*, 'EX', 60 * 60 * 24*/);
+                  
+              res.status(200).send({price, promotion});
+            })
+            .catch( (err) => {
+              res.status(404).send('Data Not Found');
+              console.log(err);
+            })
         }
 
-        res.status(200).send({price, promotion});
       })
       .catch( (err) => {
-        res.status(404).send('Data Not Found');
-        console.log(err);
-      })
+        
+      });
   }
 });
 
@@ -106,7 +134,7 @@ app.get('/:product_id', (req, res) => {
 app.post('/PriceAndPromotion', (req, res) => {
 
   let data = req.body;
-
+  console.log(data);
   insertRecords(data)
     .then( (response) => res.status(201).send({"NumberOfInsertedRecords": response.length, "ProductIds": response}))
     .catch( (err) => res.status(400).send({error: JSON.stringify(err)}));

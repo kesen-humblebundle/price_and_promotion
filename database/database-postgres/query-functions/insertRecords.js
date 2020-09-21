@@ -1,7 +1,7 @@
 const db = require('../db.js');
 
 /**
- * @param {Array.<Object>} record(s) to be added 
+ * @param {object} record to be added 
  * 
  * @returns {Array} id(s) of records that were added
  */

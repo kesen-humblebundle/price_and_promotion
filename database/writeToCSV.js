@@ -10,13 +10,20 @@ const csvWriter = require('csv-write-stream');
  *  @params {string} name of the csv file
 */
 
-const writeData = (records = 1e7, dataGeneratorFunc, fileName) => {
+const writeData = (records = 1e7, dataGeneratorFunc, fileName, headers) => {
 
   (async () => {
+    
     try {
-      // let writer = csvWriter({sendHeaders: false});
-      let writer = csvWriter();
-      writer.pipe(fs.createWriteStream(`./database/csv/${fileName}.csv`));
+      let writer;
+      if (headers !== null) {
+        writer = csvWriter({sendHeaders: false});
+        writer.pipe(fs.createWriteStream(`./test/performance/user-files/data/${fileName}.csv`));
+      } else {
+        writer = csvWriter();
+        writer.pipe(fs.createWriteStream(`./database/csv/${fileName}.csv`));
+      }
+
       for (let i = 1; i <= records; i++) {
         
         let data = dataGeneratorFunc(i);
