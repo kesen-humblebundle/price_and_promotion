@@ -31,7 +31,7 @@ module.exports = async (ids) => {
       )
       .leftJoin(
         db({pubd: 'publisher_discounts'})
-        .whereRaw('(? >= pubd.start) AND (? <= pubd.end)', [date, date])
+        .whereRaw('(? >= pubd.start_date) AND (? <= pubd.end_date)', [date, date])
         .as('pubd'), 'pubd.publisher_id', 'p.publisher_id'
       )
       .unionAll([ 
@@ -45,7 +45,7 @@ module.exports = async (ids) => {
         .leftJoin(
           db({gend: 'general_discounts'})
           .select('gend.product_id', 'gend.discount')
-          .whereRaw('(? >= gend.start) AND (? <= gend.end)', [date, date])
+          .whereRaw('(? >= gend.start_date) AND (? <= gend.end_date)', [date, date])
           .as('gend'), 'gend.product_id', 'p.id'
         )
       ]).as('pgd')

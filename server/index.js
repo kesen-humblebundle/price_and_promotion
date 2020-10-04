@@ -5,11 +5,14 @@ const redis = require("redis");
 const { promisify } = require("util");
 const app = express();
 
-const port_redis = process.env.PORT || 6379;
+const redis_options = {
+  host: 'redis',
+  port: 6379};
+
 const PORT = process.env.PORT || 3006;
 
 //configure redis client on port 6379
-const redis_client = redis.createClient();
+const redis_client = redis.createClient(redis_options);
 const getAsync = promisify(redis_client.get).bind(redis_client);
 
 redis_client.on('connect', () => console.log('Redis Client Connected'));
@@ -64,6 +67,7 @@ app.get('/PriceAndPromotion/:product_id', (req, res) => {
                 price = Number(price.toFixed(2));
               }
                 
+              console.log({price: promotion})
               //add data to Redis
               redis_client.set(String(id), JSON.stringify({price, promotion}), redis.print/*, 'EX', 60 * 60 * 24*/);
                   
@@ -77,7 +81,7 @@ app.get('/PriceAndPromotion/:product_id', (req, res) => {
 
       })
       .catch( (err) => {
-        
+        console.log(err);
       });
   }
 });

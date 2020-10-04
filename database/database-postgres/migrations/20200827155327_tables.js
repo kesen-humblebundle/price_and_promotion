@@ -35,8 +35,8 @@ exports.up = async function(knex) {
         .references('id')
         .inTable('publishers')
         .notNullable();
-      tbl.date('start').notNullable();
-      tbl.date('end').notNullable();
+      tbl.date('start_date').notNullable();
+      tbl.date('end_date').notNullable();
     })
     .createTable("general_discounts", tbl => {
       tbl.increments('id')
@@ -46,8 +46,8 @@ exports.up = async function(knex) {
       .references('id')
       .inTable('products')
       .notNullable();
-      tbl.date('start').notNullable();
-      tbl.date('end').notNullable();
+      tbl.date('start_date').notNullable();
+      tbl.date('end_date').notNullable();
     });
  
 };
