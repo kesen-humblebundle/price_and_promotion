@@ -1,24 +1,24 @@
 const newrelic = require('newrelic');
 require('dotenv').config(); //loading environment 
 const express = require('express');
-const redis = require("redis");
+// const redis = require("redis");
 const { promisify } = require("util");
 const app = express();
 
 //for docker
-const redis_options = {
-  host: 'redis',
-  port: 6379};
+// const redis_options = {
+//   host: 'redis',
+//   port: 6379};
 
-const PORT = process.env.PORT || 3006;
+const PORT = process.env.PORT;
 
 //configure redis client on port 6379
-const redis_client = redis.createClient(redis_options);
-const getAsync = promisify(redis_client.get).bind(redis_client);
+// const redis_client = redis.createClient(redis_options);
+// const getAsync = promisify(redis_client.get).bind(redis_client);
 
-redis_client.on('connect', () => console.log('Redis Client Connected'));
-redis_client.on('error', (err) => console.log('Something went wrong ' + err));
-redis_client.unref();
+// redis_client.on('connect', () => console.log('Redis Client Connected'));
+// redis_client.on('error', (err) => console.log('Something went wrong ' + err));
+// redis_client.unref();
 
 const path = require('path');
 const cors = require('cors');
@@ -43,14 +43,14 @@ app.get('/PriceAndPromotion/:product_id', (req, res) => {
     res.status(400).send('Invalid Product Id');
   } else {
  
-    getAsync(String(id))
-      .then( (data) => {
+    // getAsync(String(id))
+    //   .then( (data) => {
         
-        if (data) {
+    //     if (data) {
           
-          res.status(200).send(data);
+    //       res.status(200).send(data);
 
-        } else {
+    //     } else {
 
           id = [Number(req.params.product_id)];
           
@@ -68,9 +68,9 @@ app.get('/PriceAndPromotion/:product_id', (req, res) => {
                 price = Number(price.toFixed(2));
               }
                 
-              console.log({price: promotion})
-              //add data to Redis
-              redis_client.set(String(id), JSON.stringify({price, promotion}), redis.print/*, 'EX', 60 * 60 * 24*/);
+              // console.log({price: promotion})
+              // //add data to Redis
+              // redis_client.set(String(id), JSON.stringify({price, promotion}), redis.print/*, 'EX', 60 * 60 * 24*/);
                   
               res.status(200).send({price, promotion});
             })
@@ -78,12 +78,12 @@ app.get('/PriceAndPromotion/:product_id', (req, res) => {
               res.status(404).send('Data Not Found');
               console.log(err);
             })
-        }
+        
 
-      })
-      .catch( (err) => {
-        console.log(err);
-      });
+      // })
+      // .catch( (err) => {
+      //   console.log(err);
+      // });
   }
 });
 

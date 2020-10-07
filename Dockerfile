@@ -1,6 +1,6 @@
 FROM node:10
 
-WORKDIR /usr/src/priceandpromotions
+WORKDIR /usr/src/priceandpromotionsNoCache
 
 # why the *
 COPY package.json .
