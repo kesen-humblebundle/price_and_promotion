@@ -1,6 +1,7 @@
 
 const path = require('path');
-const inputFile = path.join(process.cwd(), '/database/csv/publishers.csv');
+// const inputFile = path.join(process.cwd(), '/database/csv/publishers.csv');
+const inputFile = '/Users/krissy/Documents/Codes/rpt21-SDC/price_and_promotion/database/csv/publishers.csv'
 const table = 'publishers';
 const headers = 'name';
 
@@ -12,6 +13,6 @@ exports.seed = async (knex) => {
   await knex.raw(`ALTER SEQUENCE ${table}_id_seq RESTART WITH 1;`);
   
   // Inserts seed entries
-  await knex.raw(`COPY ${table} (${headers}) FROM '${inputFile}' DELIMITER ',' CSV HEADER;`);
-
+  await knex.raw(`\COPY ${table} (${headers}) FROM '${inputFile}' DELIMITER ',' CSV HEADER;`);
+ 
 };

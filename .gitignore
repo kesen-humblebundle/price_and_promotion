@@ -7,3 +7,5 @@ bundle.js
 views.js
 importData.js
 newrelic.js
+newrelic_agent.log
+**test/performance/results

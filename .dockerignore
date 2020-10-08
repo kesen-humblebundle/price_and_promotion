@@ -1,0 +1,6 @@
+node_modules
+client
+database/csv
+database/data-generator
+database/database-couchdb
+database/mongodb
