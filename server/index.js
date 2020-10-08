@@ -1,4 +1,5 @@
 const newrelic = require('newrelic');
+const compression = require('compression');
 require('dotenv').config(); //loading environment 
 const express = require('express');
 const redis = require("redis");
@@ -28,6 +29,7 @@ const deleteProductandDiscounts = require('../database/database-postgres/query-f
 const updateRecords = require('../database/database-postgres/query-functions/updateRecords.js');
 const insertRecords = require('../database/database-postgres/query-functions/insertRecords.js');
 
+app.use(compression());
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
