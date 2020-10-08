@@ -153,10 +153,7 @@ app.post('/PriceAndPromotion', (req, res) => {
   console.log(data);
 
   insertRecords(data)
-    .then( (response) => {
-    
-      res.status(201).send({"NumberOfInsertedRecords": response.length, "ProductIds": response})
-    })
+    .then( (response) => res.status(201).send({"NumberOfInsertedRecords": response.length, "ProductIds": response}))
     .catch( (err) => res.status(400).send({error: JSON.stringify(err)}));
 });
 
