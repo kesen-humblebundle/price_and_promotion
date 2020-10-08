@@ -48,6 +48,7 @@ app.get('/PriceAndPromotion/:product_id', (req, res) => {
         
         if (data) {
           
+          console.log(data);
           res.status(200).send(data);
 
         } else {
@@ -69,8 +70,16 @@ app.get('/PriceAndPromotion/:product_id', (req, res) => {
               }
                 
               console.log({price: promotion})
+
               //add data to Redis
-              redis_client.set(String(id), JSON.stringify({price, promotion}), redis.print/*, 'EX', 60 * 60 * 24*/);
+              redis_client.set(String(id), JSON.stringify({price, promotion}), redis.print);
+
+              let date = new Date();
+              date.setDate(date.getDate() + 1); //next day
+              date.setHours(0,0,0,0); //resets to midnight
+              let unixTime = new Date(date).getTime() / 1000;
+
+              redis_client.expireat(String(id), unixTime, redis.print) //set key to expire
                   
               res.status(200).send({price, promotion});
             })
@@ -140,8 +149,12 @@ app.post('/PriceAndPromotion', (req, res) => {
 
   let data = req.body;
   console.log(data);
+
   insertRecords(data)
-    .then( (response) => res.status(201).send({"NumberOfInsertedRecords": response.length, "ProductIds": response}))
+    .then( (response) => {
+    
+      res.status(201).send({"NumberOfInsertedRecords": response.length, "ProductIds": response})
+    })
     .catch( (err) => res.status(400).send({error: JSON.stringify(err)}));
 });
 
@@ -152,6 +165,7 @@ app.put('/PriceAndPromotion', (req, res) => {
 
   updateRecords(data)
     .then( (id) => {
+      redis_client.del(String(id)); //remove old data
       res.status(200).send(`Updated Product Id ${id[0]} Successfully`);
     })
     .catch( (err) => {
@@ -168,7 +182,7 @@ app.delete('/PriceAndPromotion/:product_id', (req, res) => {
 
   deleteProductandDiscounts(id)
   .then( (response) => {
-    
+    redis_client.del(String(id)); //remove old data
     if(response === 0) {
       res.status(400).send('Record is not found');
     } else {
