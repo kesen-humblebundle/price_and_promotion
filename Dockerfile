@@ -1,8 +1,7 @@
 FROM node:10
 
-WORKDIR /usr/src/priceandpromotionsNoCache
+WORKDIR /usr/src/priceandpromotionsNOcache
 
-# why the *
 COPY package.json .
 RUN npm install
 
