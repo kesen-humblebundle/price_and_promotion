@@ -1,4 +1,5 @@
 const newrelic = require('newrelic');
+const compression = require('compression');
 require('dotenv').config(); //loading environment 
 const express = require('express');
 const redis = require("redis");
@@ -27,6 +28,8 @@ const getPriceAndPromotion = require('../database/database-postgres/query-functi
 const deleteProductandDiscounts = require('../database/database-postgres/query-functions/deleteProductandDiscounts.js');
 const updateRecords = require('../database/database-postgres/query-functions/updateRecords.js');
 const insertRecords = require('../database/database-postgres/query-functions/insertRecords.js');
+
+app.use(compression()); //headers for post/puts should be Cache-Control: no-transform
 
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: false }));
@@ -151,10 +154,7 @@ app.post('/PriceAndPromotion', (req, res) => {
   console.log(data);
 
   insertRecords(data)
-    .then( (response) => {
-    
-      res.status(201).send({"NumberOfInsertedRecords": response.length, "ProductIds": response})
-    })
+    .then( (response) => res.status(201).send({"NumberOfInsertedRecords": response.length, "ids": response}))
     .catch( (err) => res.status(400).send({error: JSON.stringify(err)}));
 });
 
