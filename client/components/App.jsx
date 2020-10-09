@@ -57,7 +57,7 @@ class App extends React.Component {
     const deployedURL = `http://ec2-3-21-76-100.us-east-2.compute.amazonaws.com:3006/PriceAndPromotion/${productId}`;
     const localURL = `http://localhost:3006/PriceAndPromotion/${productId}`;
 
-    return axios.get(deployedURL)
+    return axios.get(localURL)
       .then((response) => {
         let data = response.data;
         return data;

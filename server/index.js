@@ -29,7 +29,8 @@ const deleteProductandDiscounts = require('../database/database-postgres/query-f
 const updateRecords = require('../database/database-postgres/query-functions/updateRecords.js');
 const insertRecords = require('../database/database-postgres/query-functions/insertRecords.js');
 
-app.use(compression());
+app.use(compression()); //headers for post/puts should be Cache-Control: no-transform
+
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
@@ -153,7 +154,7 @@ app.post('/PriceAndPromotion', (req, res) => {
   console.log(data);
 
   insertRecords(data)
-    .then( (response) => res.status(201).send({"NumberOfInsertedRecords": response.length, "ProductIds": response}))
+    .then( (response) => res.status(201).send({"NumberOfInsertedRecords": response.length, "ids": response}))
     .catch( (err) => res.status(400).send({error: JSON.stringify(err)}));
 });
 
