@@ -16,6 +16,7 @@ module.exports = {
       host: PGHOST, //ec2 ip address
       port: PGPORT //lower the firewall
     },
+    pool: { min: 0, max: 50 },
     migrations: {
       directory: __dirname + "/database/database-postgres/migrations"
     },
