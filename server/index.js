@@ -6,10 +6,11 @@ const redis = require("redis");
 const { promisify } = require("util");
 const app = express();
 
-//for docker
+//connect to redis 
 const redis_options = {
-  host: 'redis',
-  port: 6379};
+  host: process.env.REDIS_HOST,
+  port: process.env.REDIS_PORT,
+  password: process.env.REDIS_PW};
 
 const PORT = process.env.PORT || 3006;
 
