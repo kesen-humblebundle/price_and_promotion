@@ -1,0 +1,9 @@
+app:
+  container_name: priceandpromotionsNOcache
+  build: .
+  working_dir: /usr/lsrc/priceandpromotionsNOcache
+  ports:
+    - "3008:3008"
+  env_file:
+    - .env
+  command: bash -c "npm run start"

@@ -54,10 +54,10 @@ class App extends React.Component {
 
   fetchProductPriceAndPromo(productId) {
 
-    const deployedURL = `http://ec2-52-15-188-153.us-east-2.compute.amazonaws.com:3008/PriceAndPromotion/${productId}`;
+    const deployedURL = `http://3.19.55.251:3008/PriceAndPromotion/${productId}`;
     const localURL = `http://localhost:3008/PriceAndPromotion/${productId}`;
 
-    return axios.get(localURL)
+    return axios.get(deployedURL)
       .then((response) => {
         let data = response.data;
         return data;
