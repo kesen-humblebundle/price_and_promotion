@@ -1,13 +1,17 @@
 # Price and Promotion Service 
 Microservice for Humble Bundle item detail page clone. Modified legacy code to make a scalable app using PostgreSQL as the database.
 
+>
+><img src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/1711f42f-acb0-41b7-b440-d5d74b7bf5dd/Screen_Shot_2020-11-17_at_11.36.07_PM.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20201118%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20201118T075544Z&X-Amz-Expires=86400&X-Amz-Signature=e2983196928113030d7461a1e8dffd6e11ce2b076ccd575cd1e967730671878c&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Screen_Shot_2020-11-17_at_11.36.07_PM.png%22" width="600"/>
+><p>Stress Testing with Loader: 10,000 Clients per second for 20 seconds.</p>
 
 ## Table of Contents
 
 1. [Usage](#Usage)
-2. [Requirements](#requirements)
-3. [Installation and Setup](#InstallationandSetup)
-4. [Deployment](#deployment)
+2. [Requirements](#Requirements)
+3. [Installation and Setup](#Installation-and-Setup)
+4. [Other Technologies](#Other-Technologies)
+5. [Deployment](#Deployment)
 
 ## Usage
 
@@ -31,7 +35,6 @@ Microservice for Humble Bundle item detail page clone. Modified legacy code to m
 - Knex
 - Axios
 - Styled-components
-- Redis
 
 ## Installation and Setup
 
@@ -53,6 +56,13 @@ From within the root directory:
 ```sh
  $ npm start 
 ```
+
+## Other Technologies
+- Nginx
+- Redis
+- Loader
+- New Relic
+- GatlingJS
 
 ## Deployment
 
