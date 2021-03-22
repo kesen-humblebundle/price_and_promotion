@@ -1,9 +1,8 @@
 # Price and Promotion Service 
 Microservice for Humble Bundle item detail page clone. Modified legacy code to make a scalable app using PostgreSQL as the database.
 
->
-><img src="https://github.com/krisdo/price_and_promotion/blob/master/test/LoadTesting_Caching_LoadBalancing.png" width="600"/>
-><p>Stress Testing with Loader: 10,000 Clients per second for 20 seconds.</p>
+<img src="https://github.com/krisdo/price_and_promotion/blob/master/test/LoadTesting_Caching_LoadBalancing.png" width="600"/>
+<p>Stress Testing with Loader: 10,000 Clients per second for 20 seconds.</p>
 
 ## Table of Contents
 
